@@ -1,38 +1,56 @@
 
-
 import React, { useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import SubNavbar from './SubNavbar';
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
 
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-white font-bold">SportsGear</div>
-        <div className="space-x-4">
-          <NavLink to="/" activeClassName="text-yellow-500" className="text-white">Home</NavLink>
-          <NavLink to="/all-sports-equipment" activeClassName="text-yellow-500" className="text-white">All Sports Equipment</NavLink>
-          <NavLink to="/add-equipment" activeClassName="text-yellow-500" className="text-white">Add Equipment</NavLink>
-          <NavLink to="/my-equipment-list" activeClassName="text-yellow-500" className="text-white">My Equipment List</NavLink>
-          {currentUser ? (
-            <>
-              <div className="text-white flex items-center space-x-2">
-                {currentUser.photoURL && <img src={currentUser.photoURL} alt="User Avatar" className="inline-block h-8 w-8 rounded-full" />}
-                <span className="ml-2">{currentUser.displayName || currentUser.email}</span>
-              </div>
-              <button onClick={logout} className="text-white">Log Out</button>
-            </>
-          ) : (
-            <>
-              <NavLink to="/login" activeClassName="text-yellow-500" className="text-white">Login</NavLink>
-              <NavLink to="/register" activeClassName="text-yellow-500" className="text-white">Register</NavLink>
-            </>
-          )}
+    <>
+      <nav className="bg-gray-800 p-4">
+        <div className="container mx-auto flex justify-between items-center">
+          <div className="text-white font-bold">SportsGear</div>
+          <div className="flex space-x-4 justify-center flex-1">
+            <NavLink to="/" activeClassName="text-yellow-500" className="text-white">Home</NavLink>
+            <NavLink to="/all-sports-equipment" activeClassName="text-yellow-500" className="text-white">All Sports Equipment</NavLink>
+          </div>
+          <div className="flex items-center space-x-4">
+            {currentUser ? (
+              <>
+                <div className="relative text-white">
+                  {currentUser.photoURL && (
+                    <img
+                      src={currentUser.photoURL}
+                      alt="User Avatar"
+                      className="inline-block h-8 w-8 rounded-full cursor-pointer"
+                      title={currentUser.displayName || currentUser.email}
+                    />
+                  )}
+                  <button onClick={logout} className="text-white">Log Out</button>
+                </div>
+              </>
+            ) : (
+              <>
+                <NavLink to="/login" activeClassName="text-yellow-500" className="text-white">Login</NavLink>
+                <NavLink to="/register" activeClassName="text-yellow-500" className="text-white">Register</NavLink>
+              </>
+            )}
+            <NavLink to="/search" className="text-white">
+              🔍
+            </NavLink>
+            <NavLink to="/cart" className="text-white">
+              🛒
+            </NavLink>
+            <NavLink to="/buy-now" className="bg-blue-500 text-white px-3 py-2 rounded">
+              Buy Now
+            </NavLink>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+      {currentUser && <SubNavbar />}
+    </>
   );
 };
 
