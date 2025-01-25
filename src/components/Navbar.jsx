@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import SubNavbar from './SubNavbar';
+import spLogo from '../assets/SportsGear logo.png';
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
@@ -11,7 +12,10 @@ const Navbar = () => {
     <>
       <nav className="bg-gray-800 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-white font-bold">SportsGear</div>
+          <div className="flex items-center text-white font-bold text-2xl">
+            <img src={spLogo} alt="SportsGear Logo" className="h-10 w-10 rounded-full mr-2" />
+            SportsGear
+          </div>
           <div className="flex space-x-4 justify-center flex-1">
             <NavLink to="/" activeClassName="text-yellow-500" className="text-white">Home</NavLink>
             <NavLink to="/all-sports-equipment" activeClassName="text-yellow-500" className="text-white">All Sports Equipment</NavLink>
