@@ -1,3 +1,4 @@
+// src/components/Navbar.jsx
 
 import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -11,8 +12,8 @@ const Navbar = () => {
   return (
     <>
       <nav className="bg-gray-800 p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center text-white font-bold text-2xl">
+        <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+          <div className="flex items-center text-white font-bold text-2xl mb-4 sm:mb-0">
             <img src={spLogo} alt="SportsGear Logo" className="h-10 w-10 rounded-full mr-2" />
             SportsGear
           </div>
@@ -32,7 +33,7 @@ const Navbar = () => {
                       title={currentUser.displayName || currentUser.email}
                     />
                   )}
-                  <button onClick={logout} className="text-white">Log Out</button>
+                  <button onClick={logout} className="text-white ml-2">Log Out</button>
                 </div>
               </>
             ) : (
