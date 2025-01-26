@@ -1,17 +1,19 @@
-// src/components/Navbar.jsx
-
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import SubNavbar from './SubNavbar';
 import spLogo from '../assets/SportsGear logo.png';
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
+  const location = useLocation();
+
+  const isHomePage = location.pathname === '/';
+  const navbarColor = isHomePage ? 'bg-gray-800' : 'bg-blue-600';
 
   return (
     <>
-      <nav className="bg-gray-800 p-4">
+      <nav className={`${navbarColor} p-4`}>
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
           <div className="flex items-center text-white font-bold text-2xl mb-4 sm:mb-0">
             <img src={spLogo} alt="SportsGear Logo" className="h-10 w-10 rounded-full mr-2" />

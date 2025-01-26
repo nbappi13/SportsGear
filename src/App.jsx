@@ -10,6 +10,7 @@ import BuyNow from './pages/BuyNow/BuyNow';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import PrivateRoute from './components/PrivateRoute';
+import Footer from './components/Footer';
 import { AuthContext } from './context/AuthContext';
 
 const App = () => {
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/login" element={currentUser ? <Navigate to="/" /> : <Login />} />
         <Route path="/register" element={currentUser ? <Navigate to="/" /> : <Register />} />
       </Routes>
+      <Footer />
     </>
   );
 };
