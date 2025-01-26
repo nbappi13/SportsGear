@@ -1,4 +1,3 @@
-
 import React, { useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -24,8 +23,8 @@ const App = () => {
         <Route path="/all-sports-equipment" element={<AllSportsEquipment />} />
         <Route path="/add-equipment" element={<PrivateRoute><AddEquipment /></PrivateRoute>} />
         <Route path="/my-equipment-list" element={<PrivateRoute><MyEquipmentList /></PrivateRoute>} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/buy-now" element={<BuyNow />} />
+        <Route path="/cart" element={currentUser ? <Cart /> : <Navigate to="/login" />} />
+        <Route path="/buy-now" element={currentUser ? <BuyNow /> : <Navigate to="/login" />} />
         <Route path="/login" element={currentUser ? <Navigate to="/" /> : <Login />} />
         <Route path="/register" element={currentUser ? <Navigate to="/" /> : <Register />} />
       </Routes>
