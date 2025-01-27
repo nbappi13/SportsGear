@@ -1,0 +1,33 @@
+
+import React, { useState, useEffect } from 'react';
+
+const EquipmentCards = () => {
+  const [equipment, setEquipment] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/equipment')
+      .then(response => response.json())
+      .then(data => setEquipment(data))
+      .catch(error => console.error('Error fetching equipment:', error));
+  }, []);
+
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {equipment.map(item => (
+        <div
+          key={item._id}
+          className="card shadow-md bg-white p-4 rounded-lg transform hover:scale-105 transition-transform duration-300"
+        >
+          <img src={item.photoUrl} alt={item.itemName} className="w-full h-40 object-cover rounded-lg mb-4" />
+          <h3 className="text-xl font-bold mb-2">{item.itemName}</h3>
+          <p className="text-gray-600 mb-2">Category: {item.categoryName}</p>
+          <p className="text-gray-600 mb-2">Price: ${item.price}</p>
+          <p className="text-gray-600 mb-2">Rating: {item.rating}</p>
+          <button className="btn btn-primary mt-2">View Details</button>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default EquipmentCards;
