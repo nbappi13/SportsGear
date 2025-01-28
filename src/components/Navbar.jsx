@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { CartContext } from '../context/CartContext';
 import SubNavbar from './SubNavbar';
 import spLogo from '../assets/SportsGear logo.png';
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
+  const { cartItems } = useContext(CartContext);
   const location = useLocation();
 
   const isHomePage = location.pathname === '/';
@@ -47,8 +49,13 @@ const Navbar = () => {
             <NavLink to="/search" className="text-white">
               🔍
             </NavLink>
-            <NavLink to="/cart" className="text-white">
+            <NavLink to="/cart" className="relative text-white">
               🛒
+              {cartItems.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full h-6 w-6 flex items-center justify-center text-sm">
+                  {cartItems.length}
+                </span>
+              )}
             </NavLink>
             <NavLink to="/buy-now" className="bg-blue-500 text-white px-3 py-2 rounded">
               Buy Now

@@ -9,15 +9,17 @@ import Cart from "./pages/Cart/Cart";
 import BuyNow from "./pages/BuyNow/BuyNow";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import ViewDetails from "./pages/ViewDetails/ViewDetails";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer";
 import { AuthContext } from "./context/AuthContext";
+import { CartProvider } from "./context/CartContext"; // Import CartProvider
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
 
   return (
-    <>
+    <CartProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -47,6 +49,14 @@ const App = () => {
           element={currentUser ? <BuyNow /> : <Navigate to="/login" />}
         />
         <Route
+          path="/viewdetails/:id"
+          element={
+            <PrivateRoute>
+              <ViewDetails />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/login"
           element={currentUser ? <Navigate to="/" /> : <Login />}
         />
@@ -56,7 +66,7 @@ const App = () => {
         />
       </Routes>
       <Footer />
-    </>
+    </CartProvider>
   );
 };
 

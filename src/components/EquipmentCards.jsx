@@ -1,8 +1,9 @@
-
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const EquipmentCards = () => {
   const [equipment, setEquipment] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch('http://localhost:5000/equipment')
@@ -10,6 +11,10 @@ const EquipmentCards = () => {
       .then(data => setEquipment(data))
       .catch(error => console.error('Error fetching equipment:', error));
   }, []);
+
+  const handleViewDetails = (id) => {
+    navigate(`/viewdetails/${id}`);
+  };
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
@@ -23,7 +28,12 @@ const EquipmentCards = () => {
           <p className="text-gray-600 mb-2">Category: {item.categoryName}</p>
           <p className="text-gray-600 mb-2">Price: ${item.price}</p>
           <p className="text-gray-600 mb-2">Rating: {item.rating}</p>
-          <button className="btn btn-primary mt-2">View Details</button>
+          <button
+            className="btn btn-primary mt-2"
+            onClick={() => handleViewDetails(item._id)}
+          >
+            View Details
+          </button>
         </div>
       ))}
     </div>
