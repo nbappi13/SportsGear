@@ -13,7 +13,7 @@ import ViewDetails from "./pages/ViewDetails/ViewDetails";
 import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer";
 import { AuthContext } from "./context/AuthContext";
-import { CartProvider } from "./context/CartContext"; // Import CartProvider
+import { CartProvider } from "./context/CartContext"; 
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);

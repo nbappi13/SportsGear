@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
 import SubNavbar from './SubNavbar';
@@ -9,9 +9,22 @@ const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
   const { cartItems } = useContext(CartContext);
   const location = useLocation();
+  const navigate = useNavigate();
+  const [showSearch, setShowSearch] = useState(false);
 
   const isHomePage = location.pathname === '/';
   const navbarColor = isHomePage ? 'bg-gray-800' : 'bg-blue-600';
+
+  const handleBuyNowClick = () => {
+    navigate('/');
+    setTimeout(() => {
+      document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
+
+  const toggleSearch = () => {
+    setShowSearch(!showSearch);
+  };
 
   return (
     <>
@@ -46,9 +59,17 @@ const Navbar = () => {
                 <NavLink to="/register" activeClassName="text-yellow-500" className="text-white">Register</NavLink>
               </>
             )}
-            <NavLink to="/search" className="text-white">
+            <button className="text-white" onClick={toggleSearch}>
               🔍
-            </NavLink>
+            </button>
+            {showSearch && (
+              <input
+                type="text"
+                placeholder="Search..."
+                className="absolute top-14 right-16 p-2 rounded-md shadow-lg border focus:outline-none"
+                style={{ width: '200px', transition: 'width 0.3s ease-in-out' }}
+              />
+            )}
             <NavLink to="/cart" className="relative text-white">
               🛒
               {cartItems.length > 0 && (
@@ -57,9 +78,12 @@ const Navbar = () => {
                 </span>
               )}
             </NavLink>
-            <NavLink to="/buy-now" className="bg-blue-500 text-white px-3 py-2 rounded">
+            <button
+              onClick={handleBuyNowClick}
+              className="bg-blue-500 text-white px-3 py-2 rounded"
+            >
               Buy Now
-            </NavLink>
+            </button>
           </div>
         </div>
       </nav>
