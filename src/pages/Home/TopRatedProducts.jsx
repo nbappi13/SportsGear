@@ -23,31 +23,34 @@ const TopRatedProducts = () => {
   return (
     <div className="p-6 bg-gradient-to-r from-gray-100 via-white to-gray-100">
       <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">Top-rated Products</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {topRated.map((product, index) => (
-          <Card key={index} className="shadow-lg hover:shadow-2xl transition-shadow duration-300 rounded-full overflow-hidden" style={{ width: '250px', height: '350px' }}>
-            <div className="relative">
-              <img 
-                src={product.photoUrl} 
-                alt={product.itemName} 
-                className="w-full h-56 object-cover transform hover:scale-105 transition-transform duration-300 rounded-full" 
-              />
-            </div>
-            <CardBody className="text-center p-4">
-              <Typography variant="h5" className="mb-2 font-semibold text-gray-900">{product.itemName}</Typography>
-            </CardBody>
-            <CardFooter className="text-center">
+          <div 
+            key={index} 
+            className="group relative rounded-full overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 mx-auto" 
+            style={{ width: '250px', height: '250px' }}
+          >
+            <img 
+              src={product.photoUrl} 
+              alt={product.itemName} 
+              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300" 
+            />
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-300 rounded-full">
               <Button 
                 variant="gradient" 
                 color="blue" 
-                fullWidth 
-                className="hover:bg-gradient-to-r hover:from-purple-400 hover:to-pink-600 transition-colors duration-300"
                 onClick={() => handleViewDetails(product._id)}
+                className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
               >
                 View Details
               </Button>
-            </CardFooter>
-          </Card>
+            </div>
+            <div className="absolute bottom-0 left-0 right-0 text-center p-4 bg-white bg-opacity-90 group-hover:bg-opacity-100 transition-all duration-300">
+              <Typography variant="h5" className="font-semibold text-gray-900">
+                {product.itemName}
+              </Typography>
+            </div>
+          </div>
         ))}
       </div>
     </div>
