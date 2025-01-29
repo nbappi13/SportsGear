@@ -1,16 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const EquipmentCards = () => {
-  const [equipment, setEquipment] = useState([]);
+const EquipmentCards = ({ equipment }) => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetch('http://localhost:5000/equipment')
-      .then(response => response.json())
-      .then(data => setEquipment(data))
-      .catch(error => console.error('Error fetching equipment:', error));
-  }, []);
 
   const handleViewDetails = (id) => {
     navigate(`/viewdetails/${id}`);
