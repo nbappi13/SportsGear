@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import AllSportsEquipment from "./pages/AllSportsEquipment/AllSportsEquipment";
 import AddEquipment from "./pages/AddEquipment/AddEquipment";
 import MyEquipmentList from "./pages/MyEquipmentList/MyEquipmentList";
+import UpdatedPage from "./pages/UpdatedPage/UpdatedPage"; 
 import Cart from "./pages/Cart/Cart";
 import BuyNow from "./pages/BuyNow/BuyNow";
 import Login from "./pages/Login/Login";
@@ -37,6 +38,14 @@ const App = () => {
           element={
             <PrivateRoute>
               <MyEquipmentList />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/update/:id"
+          element={
+            <PrivateRoute>
+              <UpdatedPage />
             </PrivateRoute>
           }
         />
