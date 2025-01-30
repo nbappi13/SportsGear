@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import overlappingImage1 from "../../assets/overlapping-image1.avif";
 import overlappingImage2 from "../../assets/overlapping-image2.png";
 import sliderImage1 from "../../assets/slider-image1.jpg";
@@ -17,13 +16,23 @@ const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % sliderImages.length);
-    }, 3000); 
+    }, 3000);
 
     return () => clearInterval(interval);
   }, [sliderImages.length]);
 
+  const handleBrowseClick = () => {
+    const productsSection = document.getElementById('products-section');
+    if (productsSection) {
+      productsSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   return (
-    <div className="flex flex-col lg:flex-row items-stretch bg-gray-50 relative" style={{ height: '60vh' }}>
+    <div className="flex flex-col lg:flex-row items-stretch bg-gray-50 relative" style={{ height: '80vh' }}>
 
       <div className="relative w-full lg:w-1/2 h-full flex items-start justify-start">
         <img
@@ -33,7 +42,6 @@ const Banner = () => {
         />
       </div>
 
-   
       <div className="relative w-full lg:w-full h-full flex-grow">
         <div className="banner-slider absolute inset-0">
           <img
@@ -47,13 +55,15 @@ const Banner = () => {
           <p className="text-lg text-white shadow-text">
             Browse our quality product collection and enjoy the best quality.
           </p>
-          <button className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-orange-500">
+          <button 
+            onClick={handleBrowseClick}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-orange-500 transition-all duration-300 hover:scale-105"
+          >
             Browse Now
           </button>
         </div>
       </div>
 
-   
       <div className="absolute top-0 left-0 w-full h-full flex items-start justify-start xl:block lg:hidden md:hidden sm:hidden">
         <img
           src={overlappingImage1}

@@ -7,7 +7,6 @@ import UpcomingEvents from "./UpcomingEvents";
 const Home = () => {
   const [equipment, setEquipment] = useState([]);
 
-
   useEffect(() => {
     fetch("http://localhost:5000/equipment/home") 
       .then((response) => response.json())
@@ -21,7 +20,8 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <div id="products-section">
+    
+      <div id="products-section" className="scroll-mt-30">
         <EquipmentCards equipment={equipment} /> 
       </div>
       <TopRatedProducts />
