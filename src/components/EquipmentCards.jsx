@@ -17,9 +17,9 @@ const EquipmentCards = ({ equipment }) => {
         >
           <img src={item.photoUrl} alt={item.itemName} className="w-full h-40 object-cover rounded-lg mb-4" />
           <h3 className="text-xl font-bold mb-2">{item.itemName}</h3>
-          <p className="text-gray-600 mb-2">Category: {item.categoryName}</p>
-          <p className="text-gray-600 mb-2">Price: ${item.price}</p>
-          <p className="text-gray-600 mb-2">Rating: {item.rating}</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-2">Category: {item.categoryName}</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-2">Price: ${item.price}</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-2">Rating: {item.rating}</p>
           <button
             className="bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600
                        hover:from-purple-600 hover:to-blue-600 dark:hover:from-purple-700 dark:hover:to-blue-700

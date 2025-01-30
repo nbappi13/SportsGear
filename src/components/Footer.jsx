@@ -22,13 +22,13 @@ const Footer = () => {
             <div className="mb-6 md:mb-0">
               <h2 className="font-bold text-lg mb-4 text-white dark:text-white">Contact Us</h2>
               <p className="text-white dark:text-white">
-                Email: <a href="mailto:info@sportsgear.com" className="hover:underline">info@sportsgear.com</a>
+                Email: <a href="mailto:info@sportsgear.com" className="hover:underline">info@sportsgearrrr.comm</a>
               </p>
               <p className="text-white dark:text-white mt-2">
-                Phone: +123 456 7890
+                Phone: +880 007 0013
               </p>
               <p className="text-white dark:text-white mt-2">
-                Address: 123 Sports Avenue, Sportstown, ST 45678
+                Address: 123 Sports Avenue, Nilkhet, Dhaka-1205
               </p>
             </div>
             <div>

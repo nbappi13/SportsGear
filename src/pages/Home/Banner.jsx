@@ -32,7 +32,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row items-stretch bg-gray-50 relative" style={{ height: '80vh' }}>
+    <div className="flex flex-col lg:flex-row items-stretch bg-gray-50 relative" style={{ height: '79vh' }}>
 
       <div className="relative w-full lg:w-1/2 h-full flex items-start justify-start">
         <img

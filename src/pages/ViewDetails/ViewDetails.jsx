@@ -2,18 +2,20 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { CartContext } from '../../context/CartContext';
+import { useThemeContext } from '../../context/ThemeContext';
 import Swal from 'sweetalert2';
 
 const ViewDetails = () => {
   const { currentUser } = useContext(AuthContext);
   const { addToCart } = useContext(CartContext);
+  const { theme } = useThemeContext(); 
   const { id } = useParams();
   const [item, setItem] = useState(null);
   const [isBought, setIsBought] = useState(false);
 
   useEffect(() => {
     if (!currentUser) {
-  
+      return;
     } else {
       fetch(`http://localhost:5000/equipment/${id}`)
         .then(response => response.json())
@@ -58,8 +60,8 @@ const ViewDetails = () => {
   }
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
-      <div className="w-full max-w-5xl bg-white p-8 rounded-lg shadow-lg">
+    <div className={`flex justify-center items-center min-h-screen ${theme === 'dark' ? 'bg-gray-900' : 'bg-gray-100'} p-6`}>
+      <div className={`w-full max-w-5xl ${theme === 'dark' ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-900'} p-8 rounded-lg shadow-lg`}>
         <div className="flex flex-col lg:flex-row gap-8">
           <img
             src={item.photoUrl}
@@ -68,14 +70,14 @@ const ViewDetails = () => {
           />
           <div className="flex flex-col justify-between w-full lg:w-3/5">
             <h2 className="text-4xl font-bold mb-4">{item.itemName}</h2>
-            <p className="text-lg text-gray-700 mb-2"><strong>Category:</strong> {item.categoryName}</p>
-            <p className="text-lg text-gray-700 mb-2">{item.description}</p>
-            <p className="text-lg text-gray-700 mb-2"><strong>Price:</strong> ${item.price}</p>
-            <p className="text-lg text-gray-700 mb-2"><strong>Rating:</strong> {item.rating} ⭐</p>
-            <p className="text-lg text-gray-700 mb-2"><strong>Customization:</strong> {item.customization === 'yes' ? 'Available' : 'Not Available'}</p>
-            <p className="text-lg text-gray-700 mb-2"><strong>Processing Time:</strong> {item.processingTime}</p>
-            <p className="text-lg text-gray-700 mb-2"><strong>Stock Status:</strong> {item.stockStatus === '1' ? 'In Stock' : 'Out of Stock'}</p>
-            <p className="text-lg text-gray-700 mb-2"><strong>Added By:</strong> {item.userName}</p>
+            <p className="text-lg mb-2"><strong>Category:</strong> {item.categoryName}</p>
+            <p className="text-lg mb-2">{item.description}</p>
+            <p className="text-lg mb-2"><strong>Price:</strong> ${item.price}</p>
+            <p className="text-lg mb-2"><strong>Rating:</strong> {item.rating} ⭐</p>
+            <p className="text-lg mb-2"><strong>Customization:</strong> {item.customization === 'yes' ? 'Available' : 'Not Available'}</p>
+            <p className="text-lg mb-2"><strong>Processing Time:</strong> {item.processingTime}</p>
+            <p className="text-lg mb-2"><strong>Stock Status:</strong> {item.stockStatus === '1' ? 'In Stock' : 'Out of Stock'}</p>
+            <p className="text-lg mb-2"><strong>Added By:</strong> {item.userName}</p>
             <div className="flex gap-4 mt-6">
               <button
                 className={`btn btn-primary ${isBought ? 'btn-disabled' : ''}`}
