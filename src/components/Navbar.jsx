@@ -2,12 +2,14 @@ import React, { useContext, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { CartContext } from '../context/CartContext';
+import { useThemeContext } from '../context/ThemeContext'; 
 import SubNavbar from './SubNavbar';
 import spLogo from '../assets/SportsGear logo.png';
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
   const { cartItems } = useContext(CartContext);
+  const { theme, toggleTheme } = useThemeContext(); 
   const location = useLocation();
   const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
@@ -83,6 +85,9 @@ const Navbar = () => {
               className="bg-blue-500 text-white px-3 py-2 rounded"
             >
               Buy Now
+            </button>
+            <button onClick={toggleTheme} className="text-white">
+              {theme === 'light' ? '🌙' : '☀️'}
             </button>
           </div>
         </div>
