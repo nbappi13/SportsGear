@@ -33,15 +33,13 @@ const Banner = () => {
 
   return (
     <div className="flex flex-col lg:flex-row items-stretch bg-gray-50 relative" style={{ height: '79vh' }}>
-
-      <div className="relative w-full lg:w-1/2 h-full flex items-start justify-start">
+      <div className="relative w-full lg:w-1/2 h-full flex items-start justify-start hidden xl:block">
         <img
           src={overlappingImage2}
           alt="Overlapping Image 2"
           className="banner-img-overlay"
         />
       </div>
-
       <div className="relative w-full lg:w-full h-full flex-grow">
         <div className="banner-slider absolute inset-0">
           <img
@@ -63,7 +61,6 @@ const Banner = () => {
           </button>
         </div>
       </div>
-
       <div className="absolute top-0 left-0 w-full h-full flex items-start justify-start xl:block lg:hidden md:hidden sm:hidden">
         <img
           src={overlappingImage1}

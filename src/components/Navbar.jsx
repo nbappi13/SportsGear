@@ -89,7 +89,7 @@ const Navbar = () => {
                 </NavLink>
               </>
             )}
-            <button className="text-white" onClick={toggleSearch}>
+            <button className="hidden sm:block text-white" onClick={toggleSearch}>
               🔍
             </button>
             {showSearch && (
@@ -115,7 +115,7 @@ const Navbar = () => {
             </NavLink>
             <button
               onClick={handleBuyNowClick}
-              className="bg-blue-500 text-white px-3 py-2 rounded"
+              className="hidden md:hidden lg:hidden bg-blue-500 text-white px-3 py-2 rounded"
             >
               Buy Now
             </button>
