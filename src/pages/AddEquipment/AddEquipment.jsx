@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Helmet } from "react-helmet";
 import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
 import { CgImage } from 'react-icons/cg';
@@ -81,6 +82,12 @@ const AddEquipment = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+      <Helmet>
+        <title>Add Equipment | SportsGear</title>
+        <meta name="description" content="Contribute to our community by adding new sports equipment to our catalog." />
+        <meta property="og:title" content="Add Equipment | SportsGear" />
+        <meta property="og:description" content="Help us enrich our collection with your contributions." />
+      </Helmet>
       <form className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md" onSubmit={handleSubmit}>
         <h2 className="text-2xl font-bold mb-6 text-gray-900">Add Equipment</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

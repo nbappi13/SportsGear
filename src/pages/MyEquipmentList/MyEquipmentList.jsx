@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import ConfirmationModal from "../../components/ConfirmationModal";
@@ -50,6 +51,12 @@ const MyEquipmentList = () => {
 
   return (
     <div className="p-6 bg-gray-100 dark:bg-gray-900">
+      <Helmet>
+        <title>My Equipment List | SportsGear</title>
+        <meta name="description" content="Manage your personal sports equipment collection here." />
+        <meta property="og:title" content="My Equipment List | SportsGear" />
+        <meta property="og:description" content="View and edit your added sports equipment." />
+      </Helmet>
       {isLoading ? (
         <LoadingSpinner />
       ) : (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from "react-helmet";
 import { useNavigate } from 'react-router-dom';
 import { Tooltip } from "react-tooltip";
 import { Fade } from "react-awesome-reveal";
@@ -36,6 +37,13 @@ const AllSportsEquipment = () => {
 
   return (
     <div className="p-6 dark:bg-gray-900">
+      <Helmet>
+        <title>All Sports Equipment | SportsGear</title>
+        <meta name="description" content="Browse our full range of sports equipment categorized by type and brand." />
+        <meta property="og:title" content="All Sports Equipment | SportsGear" />
+        <meta property="og:description" content="Explore our extensive collection of sports gear." />
+        <meta property="og:image" content="/path/to/your/all-equipment-image.jpg" />
+      </Helmet>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
