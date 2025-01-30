@@ -15,6 +15,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Footer from "./components/Footer";
 import { AuthContext } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext"; 
+import NotFoundPage from "./pages/NotFoundPage"; 
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
@@ -73,6 +74,7 @@ const App = () => {
           path="/register"
           element={currentUser ? <Navigate to="/" /> : <Register />}
         />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <Footer />
     </CartProvider>
