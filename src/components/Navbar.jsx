@@ -96,7 +96,7 @@ const Navbar = () => {
               <input
                 type="text"
                 placeholder="Search..."
-                className="absolute top-14 right-16 p-2 rounded-md shadow-lg border focus:outline-none"
+                className="absolute top-14 right-16 p-2 rounded-md shadow-lg border focus:outline-none z-50"
                 style={{ width: '200px', transition: 'width 0.3s ease-in-out' }}
               />
             )}
@@ -115,7 +115,7 @@ const Navbar = () => {
             </NavLink>
             <button
               onClick={handleBuyNowClick}
-              className="hidden md:hidden lg:hidden bg-blue-500 text-white px-3 py-2 rounded"
+              className="hidden md:hidden lg:block xl:block bg-blue-500 text-white px-3 py-2 rounded"
             >
               Buy Now
             </button>
