@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { CgLaptop } from 'react-icons/cg';
 import Swal from 'sweetalert2';
+import { CgImage } from 'react-icons/cg';
 
 const AddEquipment = () => {
   const { currentUser } = useContext(AuthContext);
@@ -12,11 +12,9 @@ const AddEquipment = () => {
     description: '',
     price: '',
     rating: '',
-    customization: '',
+    customization: 'no',
     processingTime: '',
-    stockStatus: '',
-    userEmail: currentUser.email,
-    userName: currentUser.displayName,
+    stockStatus: '1',
   });
 
   const handleChange = (e) => {
@@ -26,65 +24,86 @@ const AddEquipment = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData); 
 
-    const newAddEquip = formData;
+    const userEquipment = {
+      ...formData,
+      userEmail: currentUser.email,
+      userName: currentUser.displayName,
+    };
 
-
-
-fetch('http://localhost:5000/addEquip', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(newAddEquip)
-})
-  .then(res => res.json())
-  .then(data => {
-    console.log(data);
-    Swal.fire({
-      icon: 'success',
-      title: 'Success!',
-      text: 'Equipment has been added successfully.',
-      timer: 2000,
-      showConfirmButton: false
-    });
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    Swal.fire({
-      icon: 'error',
-      title: 'Error!',
-      text: 'Failed to add equipment. Please try again.',
-      timer: 2000,
-      showConfirmButton: false
-    });
-  });
-
+    fetch('http://localhost:5000/addEquip', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(userEquipment),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: 'Equipment added successfully.',
+            timer: 2000,
+            showConfirmButton: false,
+          });
+          setFormData({
+            photoUrl: '',
+            itemName: '',
+            categoryName: '',
+            description: '',
+            price: '',
+            rating: '',
+            customization: 'no',
+            processingTime: '',
+            stockStatus: '1',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error!',
+            text: data.message || 'Failed to add equipment.',
+            timer: 2000,
+            showConfirmButton: false,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error!',
+          text: 'Network error. Please try again.',
+          timer: 2000,
+          showConfirmButton: false,
+        });
+      });
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
       <form className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md" onSubmit={handleSubmit}>
-        <h2 className="text-2xl font-bold mb-6">Add Equipment</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-900">Add Equipment</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Photo URL</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Photo URL
             </label>
-            <input
-              type="text"
-              name="photoUrl"
-              value={formData.photoUrl}
-              placeholder='Enter Photo URL'
-              className="input input-bordered w-full"
-              onChange={handleChange}
-            />
+            <div className="flex items-center">
+              <CgImage size={24} className="mr-2 text-gray-500" />
+              <input
+                type="text"
+                name="photoUrl"
+                value={formData.photoUrl}
+                placeholder='Enter Photo URL'
+                className="input input-bordered w-full"
+                onChange={handleChange}
+              />
+            </div>
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Item Name</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Item Name
             </label>
             <input
               type="text"
@@ -95,9 +114,9 @@ fetch('http://localhost:5000/addEquip', {
             />
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Category Name</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Category Name
             </label>
             <input
               type="text"
@@ -108,9 +127,9 @@ fetch('http://localhost:5000/addEquip', {
             />
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Description</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Description
             </label>
             <textarea
               name="description"
@@ -120,12 +139,13 @@ fetch('http://localhost:5000/addEquip', {
             />
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Price</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Price
             </label>
             <input
               type="number"
+              step="0.01"
               name="price"
               value={formData.price}
               className="input input-bordered w-full"
@@ -133,12 +153,15 @@ fetch('http://localhost:5000/addEquip', {
             />
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Rating</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Rating
             </label>
             <input
               type="number"
+              min="0"
+              max="5"
+              step="0.1"
               name="rating"
               value={formData.rating}
               className="input input-bordered w-full"
@@ -146,22 +169,24 @@ fetch('http://localhost:5000/addEquip', {
             />
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Customization</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Customization
             </label>
-            <input
-              type="text"
+            <select
               name="customization"
               value={formData.customization}
-              className="input input-bordered w-full"
               onChange={handleChange}
-            />
+              className="select select-bordered w-full"
+            >
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Processing Time</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Processing Time
             </label>
             <input
               type="text"
@@ -172,49 +197,27 @@ fetch('http://localhost:5000/addEquip', {
             />
           </div>
 
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">Stock Status</span>
+          <div className="mb-4">
+            <label className="block text-gray-700 font-bold mb-2">
+              Stock Status
             </label>
-            <input
-              type="number"
+            <select
               name="stockStatus"
               value={formData.stockStatus}
-              className="input input-bordered w-full"
               onChange={handleChange}
-            />
-          </div>
-
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">User Email</span>
-            </label>
-            <input
-              type="email"
-              name="userEmail"
-              value={formData.userEmail}
-              className="input input-bordered w-full"
-              readOnly
-            />
-          </div>
-
-          <div className="form-control mb-4">
-            <label className="label">
-              <span className="label-text">User Name</span>
-            </label>
-            <input
-              type="text"
-              name="userName"
-              value={formData.userName}
-              className="input input-bordered w-full"
-              readOnly
-            />
+              className="select select-bordered w-full"
+            >
+              <option value="1">In Stock</option>
+              <option value="0">Out of Stock</option>
+            </select>
           </div>
         </div>
 
-        <button type="submit" className="btn btn-primary w-full mt-4">
-          Add Equipment
-        </button>
+        <div className="mt-6">
+          <button type="submit" className="btn btn-primary w-full">
+            Add Equipment
+          </button>
+        </div>
       </form>
     </div>
   );

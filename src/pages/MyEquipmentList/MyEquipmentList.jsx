@@ -49,18 +49,20 @@ const MyEquipmentList = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100">
+    <div className="p-6 bg-gray-100 dark:bg-gray-900">
       {isLoading ? (
         <LoadingSpinner />
       ) : (
         <>
-          <h2 className="text-3xl font-bold mb-6 text-center">My Equipment List</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center dark:text-gray-100">
+            My Equipment List
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {equipment.length > 0 ? (
               equipment.map((item) => (
                 <div
                   key={item._id}
-                  className="bg-white shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
+                  className="bg-white dark:bg-gray-800 dark:border-gray-700 shadow-md rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
                 >
                   <img
                     src={item.photoUrl}
@@ -68,19 +70,27 @@ const MyEquipmentList = () => {
                     className="w-full h-48 object-cover"
                   />
                   <div className="p-4">
-                    <h3 className="text-xl font-bold mb-2">{item.itemName}</h3>
-                    <p className="text-gray-600 mb-2">Category: {item.categoryName}</p>
-                    <p className="text-gray-600 mb-2">Price: ${item.price}</p>
-                    <p className="text-gray-600 mb-2">Rating: {item.rating}</p>
+                    <h3 className="text-xl font-bold mb-2 dark:text-gray-100">
+                      {item.itemName}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300 mb-2">
+                      Category: {item.categoryName}
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-2">
+                      Price: ${item.price}
+                    </p>
+                    <p className="text-gray-600 dark:text-gray-300 mb-2">
+                      Rating: {item.rating}
+                    </p>
                     <div className="flex justify-between items-center mt-4">
                       <button
-                        className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+                        className="bg-blue-500 dark:bg-blue-500 text-white dark:text-white py-2 px-4 rounded-lg hover:bg-blue-600 dark:hover:bg-blue-600"
                         onClick={() => handleUpdate(item._id)}
                       >
                         Update
                       </button>
                       <button
-                        className="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600"
+                        className="bg-red-500 dark:bg-red-500 text-white dark:text-white py-2 px-4 rounded-lg hover:bg-red-600 dark:hover:bg-red-600"
                         onClick={() => handleDelete(item._id)}
                       >
                         Delete
@@ -90,7 +100,7 @@ const MyEquipmentList = () => {
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-600">No equipment found.</p>
+              <p className="text-center dark:text-gray-300">No equipment found.</p>
             )}
           </div>
           {deleteItemId && (

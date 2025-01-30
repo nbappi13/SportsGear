@@ -1,41 +1,72 @@
-
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'; 
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
-  const location = useLocation();
-
+  const location = useLocation(); 
   const isHomePage = location.pathname === '/';
-  const footerColor = isHomePage ? 'bg-gray-800' : 'bg-blue-600';
 
   return (
-    <footer className={`${footerColor} text-white py-8`}>
-      <div className="container mx-auto flex flex-col md:flex-row justify-between items-start">
-        <div className="mb-6 md:mb-0 flex flex-col items-center md:items-start">
-          <img src="/SportsGear logo.png" alt="SportsGear Logo" className="h-12 w-12 mb-2" />
-          <h1 className="font-bold text-2xl">SportsGear</h1>
-        </div>
-        <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-8 text-center md:text-left">
-          <div>
-            <h2 className="font-bold text-lg">Contact Us</h2>
-            <p>Email: info@sportsgear.com</p>
-            <p>Phone: +123 456 7890</p>
-            <p>Address: 123 Sports Avenue, Sportstown, ST 45678</p>
+    <footer className={`${isHomePage ? 'bg-indigo-600' : 'bg-yellow-700'} dark:bg-gray-800 w-full py-12 transition-colors duration-500`}>
+      <div className="container mx-auto px-4">
+        <div className="md:flex md:items-center md:justify-between">
+          <div className="mb-6 md:mb-0">
+            <img
+              src="/SportsGear logo.png"
+              alt="SportsGear Logo"
+              className="h-12 w-12 mb-4 filter dark:(invert 100%) brightness-150"
+            />
+            <h1 className="font-bold text-3xl text-white dark:text-white tracking-wide">SportsGear</h1>
           </div>
-          <div>
-            <h2 className="font-bold text-lg">Follow Us</h2>
-            <div className="flex space-x-4 mt-2 justify-center md:justify-start">
-              <a href="https://facebook.com" className="hover:text-blue-500"><FaFacebookF /></a>
-              <a href="https://twitter.com" className="hover:text-blue-400"><FaTwitter /></a>
-              <a href="https://instagram.com" className="hover:text-pink-500"><FaInstagram /></a>
-              <a href="https://linkedin.com" className="hover:text-blue-700"><FaLinkedinIn /></a>
+          <div className="md:flex md:space-x-16">
+            <div className="mb-6 md:mb-0">
+              <h2 className="font-bold text-lg mb-4 text-white dark:text-white">Contact Us</h2>
+              <p className="text-white dark:text-white">
+                Email: <a href="mailto:info@sportsgear.com" className="hover:underline">info@sportsgear.com</a>
+              </p>
+              <p className="text-white dark:text-white mt-2">
+                Phone: +123 456 7890
+              </p>
+              <p className="text-white dark:text-white mt-2">
+                Address: 123 Sports Avenue, Sportstown, ST 45678
+              </p>
+            </div>
+            <div>
+              <h2 className="font-bold text-lg mb-4 text-white dark:text-white">Follow Us</h2>
+              <div className="flex space-x-6 text-white dark:text-gray-200">
+                <a
+                  href="https://facebook.com"
+                  className="flex items-center text-2xl hover:text-blue-500 transition-colors duration-200"
+                >
+                  <FaFacebookF />
+                </a>
+                <a
+                  href="https://twitter.com"
+                  className="flex items-center text-2xl hover:text-blue-400 transition-colors duration-200"
+                >
+                  <FaTwitter />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  className="flex items-center text-2xl hover:text-pink-500 transition-colors duration-200"
+                >
+                  <FaInstagram />
+                </a>
+                <a
+                  href="https://linkedin.com"
+                  className="flex items-center text-2xl hover:text-blue-700 transition-colors duration-200"
+                >
+                  <FaLinkedinIn />
+                </a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="mt-8 text-center">
-        <p>&copy; 2025 SportsGear. All rights reserved.</p>
+        <div className="w-full text-center pt-8 border-t dark:border-gray-600 border-white dark:border-gray-600">
+          <p className="text-white dark:text-gray-200 text-sm">
+            &copy; {new Date().getFullYear()} SportsGear. All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   );

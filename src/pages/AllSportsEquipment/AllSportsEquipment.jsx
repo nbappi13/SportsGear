@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Tooltip } from "react-tooltip";
 import { Fade } from "react-awesome-reveal";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -35,26 +35,26 @@ const AllSportsEquipment = () => {
   };
 
   return (
-    <div className="p-6 bg-gradient-to-r from-gray-100 via-white to-gray-100">
+    <div className="p-6 dark:bg-gray-900">
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <>
-          <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">
+        <div>
+          <h2 className="text-4xl font-bold mb-6 text-center dark:text-gray-100">
             All Sports Equipment
           </h2>
           <div className="flex justify-end mb-4">
             <button
               onClick={handleSortByPrice}
-              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+              className="bg-gray-800 hover:bg-gray-900 text-white dark:bg-blue-500 dark:hover:bg-blue-600 dark:text-gray-100 py-2 px-4 rounded-lg shadow"
             >
               Sort
             </button>
           </div>
           <div className="overflow-x-auto">
             <Fade cascade damping={0.1}>
-              <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-                <thead className="bg-gradient-to-r from-blue-500 to-purple-500 text-white">
+              <table className="min-w-full dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
+                <thead className="bg-gray-50 dark:bg-gradient-to-r dark:from-blue-500 dark:to-purple-500 dark:text-white">
                   <tr>
                     <th className="py-3 px-4 text-left">Photo</th>
                     <th className="py-3 px-4 text-left">Name</th>
@@ -70,7 +70,7 @@ const AllSportsEquipment = () => {
                   {equipment.map((item) => (
                     <tr
                       key={item._id}
-                      className="border-b hover:bg-gray-50 transition-colors duration-200"
+                      className="bg-white dark:bg-gray-700 dark:border-gray-800 border-b border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
                     >
                       <td className="py-3 px-4">
                         <img
@@ -83,29 +83,29 @@ const AllSportsEquipment = () => {
                         <span
                           data-tooltip-id="item-tooltip"
                           data-tooltip-content={item.description}
-                          className="font-semibold text-gray-900 cursor-pointer"
+                          className="font-semibold dark:text-gray-100 cursor-pointer"
                         >
                           {item.itemName}
                         </span>
                         <Tooltip id="item-tooltip" />
                       </td>
-                      <td className="py-3 px-4 text-gray-700">{item.categoryName}</td>
-                      <td className="py-3 px-4 text-gray-700">${item.price}</td>
-                      <td className="py-3 px-4 text-gray-700">{item.rating} ⭐</td>
-                      <td className="py-3 px-4 text-gray-700">
+                      <td className="py-3 px-4 dark:text-gray-300">{item.categoryName}</td>
+                      <td className="py-3 px-4 dark:text-gray-300">${item.price}</td>
+                      <td className="py-3 px-4 dark:text-gray-300">{item.rating} ⭐</td>
+                      <td className="py-3 px-4 dark:text-gray-300">
                         {item.customization === "yes" ? "Yes" : "No"}
                       </td>
-                      <td className="py-3 px-4 text-gray-700">
+                      <td className="py-3 px-4 dark:text-gray-300">
                         {item.stockStatus === "1" ? (
-                          <span className="text-green-600">In Stock</span>
+                          <span className="text-green-600 dark:text-green-600">In Stock</span>
                         ) : (
-                          <span className="text-red-600">Out of Stock</span>
+                          <span className="text-red-600 dark:text-red-600">Out of Stock</span>
                         )}
                       </td>
                       <td className="py-3 px-4">
                         <button
                           onClick={() => handleViewDetails(item._id)}
-                          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-2 px-4 rounded-lg hover:from-purple-500 hover:to-blue-500 transition-all duration-300"
+                          className="bg-gray-800 hover:bg-gray-900 text-white dark:bg-blue-500 dark:hover:bg-blue-600 dark:text-gray-100 py-2 px-4 rounded-lg shadow"
                         >
                           View Details
                         </button>
@@ -116,7 +116,7 @@ const AllSportsEquipment = () => {
               </table>
             </Fade>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

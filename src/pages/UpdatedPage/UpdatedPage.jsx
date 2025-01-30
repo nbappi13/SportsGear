@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 import Swal from 'sweetalert2';
 
 const UpdatedPage = () => {
@@ -8,14 +8,14 @@ const UpdatedPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [equipment, setEquipment] = useState({
-    itemName: "",
-    categoryName: "",
-    price: "",
-    rating: "",
-    customization: "",
-    stockStatus: "",
-    photoUrl: "",
-    description: "",
+    itemName: '',
+    categoryName: '',
+    price: '',
+    rating: '',
+    customization: 'no',
+    stockStatus: '1',
+    photoUrl: '',
+    description: '',
   });
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const UpdatedPage = () => {
             text: 'Failed to fetch equipment. Please check your network connection and try again.',
             icon: 'error',
             timer: 3000,
-            showConfirmButton: false
+            showConfirmButton: false,
           });
         });
     }
@@ -44,47 +44,47 @@ const UpdatedPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { _id, ...updatedData } = equipment;
+    const updatedData = { ...equipment };
 
     fetch(`http://localhost:5000/equipment/${id}`, {
-      method: "PUT",
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(updatedData),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.message === 'Equipment updated successfully') {
-        Swal.fire({
-          title: 'Success!',
-          text: 'Equipment updated successfully!',
-          icon: 'success',
-          timer: 3000,
-          showConfirmButton: false
-        }).then(() => {
-          navigate("/my-equipment-list");
-        });
-      } else {
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Equipment updated successfully!',
+            icon: 'success',
+            timer: 3000,
+            showConfirmButton: false,
+          }).then(() => {
+            navigate('/my-equipment-list');
+          });
+        } else {
+          Swal.fire({
+            title: 'Error!',
+            text: data.message || 'Failed to update equipment.',
+            icon: 'error',
+            timer: 3000,
+            showConfirmButton: false,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating equipment:", error);
         Swal.fire({
           title: 'Error!',
-          text: data.message || 'Failed to update equipment.',
+          text: 'Network error. Please check your connection and try again.',
           icon: 'error',
           timer: 3000,
-          showConfirmButton: false
+          showConfirmButton: false,
         });
-      }
-    })
-    .catch((error) => {
-      console.error("Error updating equipment:", error);
-      Swal.fire({
-        title: 'Error!',
-        text: 'Failed to update equipment. Please check your network connection and try again.',
-        icon: 'error',
-        timer: 3000,
-        showConfirmButton: false
       });
-    });
   };
 
   if (!currentUser) {
@@ -96,7 +96,9 @@ const UpdatedPage = () => {
       <h2 className="text-3xl font-bold mb-6 text-center">Update Equipment</h2>
       <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-lg grid grid-cols-2 gap-4">
         <div className="col-span-2">
-          <label className="block text-gray-700 font-bold mb-2">User Email</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            User Email
+          </label>
           <input
             type="email"
             name="userEmail"
@@ -106,7 +108,9 @@ const UpdatedPage = () => {
           />
         </div>
         <div className="col-span-2">
-          <label className="block text-gray-700 font-bold mb-2">User Name</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            User Name
+          </label>
           <input
             type="text"
             name="userName"
@@ -116,7 +120,9 @@ const UpdatedPage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">Item Name</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Item Name
+          </label>
           <input
             type="text"
             name="itemName"
@@ -126,7 +132,9 @@ const UpdatedPage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">Category</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Category
+          </label>
           <input
             type="text"
             name="categoryName"
@@ -136,7 +144,9 @@ const UpdatedPage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">Price</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Price
+          </label>
           <input
             type="number"
             name="price"
@@ -146,7 +156,9 @@ const UpdatedPage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">Rating</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Rating
+          </label>
           <input
             type="number"
             name="rating"
@@ -156,7 +168,9 @@ const UpdatedPage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">Customization</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Customization
+          </label>
           <select
             name="customization"
             value={equipment.customization}
@@ -168,7 +182,9 @@ const UpdatedPage = () => {
           </select>
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">Stock Status</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Stock Status
+          </label>
           <select
             name="stockStatus"
             value={equipment.stockStatus}
@@ -180,7 +196,9 @@ const UpdatedPage = () => {
           </select>
         </div>
         <div className="col-span-2">
-          <label className="block text-gray-700 font-bold mb-2">Photo URL</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Photo URL
+          </label>
           <input
             type="text"
             name="photoUrl"
@@ -190,7 +208,9 @@ const UpdatedPage = () => {
           />
         </div>
         <div className="col-span-2">
-          <label className="block text-gray-700 font-bold mb-2">Description</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Description
+          </label>
           <textarea
             name="description"
             value={equipment.description}
