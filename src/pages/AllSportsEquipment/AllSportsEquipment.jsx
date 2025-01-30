@@ -7,36 +7,31 @@ import LoadingSpinner from "../../components/LoadingSpinner";
 const AllSportsEquipment = () => {
   const [equipment, setEquipment] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [transitionTime, setTransitionTime] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
-    let mounted = true;
     setIsLoading(true);
-    setTransitionTime(Date.now());
-
     fetch("http://localhost:5000/equipment")
       .then((response) => response.json())
       .then((data) => {
-        if (mounted && transitionTime + 1500 <= Date.now()) {
-          setEquipment(data);
-          setIsLoading(false);
-        }
+        setEquipment(data);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching equipment:", error);
-        if (mounted) {
-          setIsLoading(false);
-        }
+        setIsLoading(false);
       });
-
-    return () => {
-      mounted = false;
-    };
   }, []);
 
   const handleViewDetails = (id) => {
     navigate(`/viewdetails/${id}`);
+  };
+
+  const handleSortByPrice = () => {
+    const sortedEquipment = [...equipment].sort((a, b) => {
+      return parseFloat(a.price) - parseFloat(b.price);
+    });
+    setEquipment(sortedEquipment);
   };
 
   return (
@@ -48,6 +43,14 @@ const AllSportsEquipment = () => {
           <h2 className="text-4xl font-bold mb-6 text-center text-gray-800">
             All Sports Equipment
           </h2>
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={handleSortByPrice}
+              className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600"
+            >
+              Sort
+            </button>
+          </div>
           <div className="overflow-x-auto">
             <Fade cascade damping={0.1}>
               <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
