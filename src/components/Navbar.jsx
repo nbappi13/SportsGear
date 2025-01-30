@@ -17,6 +17,15 @@ const Navbar = () => {
   const isHomePage = location.pathname === '/';
   const navbarColor = isHomePage ? 'bg-gray-800' : theme === 'dark' ? 'bg-gray-900' : 'bg-blue-600';
 
+  const handleHomeClick = (e) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
+
   const handleBuyNowClick = () => {
     navigate('/');
     setTimeout(() => {
@@ -40,6 +49,7 @@ const Navbar = () => {
             <NavLink 
               to="/" 
               className={({ isActive }) => isActive ? "text-yellow-500" : "text-white"}
+              onClick={handleHomeClick} 
             >
               Home
             </NavLink>

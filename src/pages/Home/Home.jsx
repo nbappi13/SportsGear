@@ -19,7 +19,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div id="home-page">
       <Helmet>
         <title>Home | SportsGear</title>
         <meta name="description" content="Welcome to SportsGear - Your one-stop shop for all sports equipment!" />
