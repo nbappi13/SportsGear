@@ -13,10 +13,10 @@ const EquipmentCards = ({ equipment }) => {
       {equipment.map((item) => (
         <div
           key={item._id}
-          className="dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 p-4 rounded-lg transform hover:scale-105 transition-transform duration-300"
+          className="bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100 p-4 rounded-lg transform hover:scale-105 transition-transform duration-300 border border-gray-200"
         >
           <img src={item.photoUrl} alt={item.itemName} className="w-full h-40 object-cover rounded-lg mb-4" />
-          <h3 className="text-xl font-bold mb-2">{item.itemName}</h3>
+          <h3 className="text-xl font-bold mb-2 dark:text-gray-100">{item.itemName}</h3>
           <p className="text-gray-600 dark:text-gray-300 mb-2">Category: {item.categoryName}</p>
           <p className="text-gray-600 dark:text-gray-300 mb-2">Price: ${item.price}</p>
           <p className="text-gray-600 dark:text-gray-300 mb-2">Rating: {item.rating}</p>

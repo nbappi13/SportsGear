@@ -16,7 +16,7 @@ const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % sliderImages.length);
-    }, 3000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [sliderImages.length]);
