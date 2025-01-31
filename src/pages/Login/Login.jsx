@@ -30,7 +30,6 @@ const Login = () => {
         title: 'Oops...',
         text: 'Incorrect credentials. Please try again.',
       });
-      console.error(error);
     }
   };
 
@@ -53,7 +52,6 @@ const Login = () => {
         title: 'Oops...',
         text: 'Google login failed. Please try again.',
       });
-      console.error(error);
     }
   };
 
@@ -76,7 +74,6 @@ const Login = () => {
         title: 'Oops...',
         text: 'GitHub login failed. Please try again.',
       });
-      console.error(error);
     }
   };
 

@@ -1,21 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from "react";
 import { Helmet } from "react-helmet";
-import { AuthContext } from '../../context/AuthContext';
-import Swal from 'sweetalert2';
-import { CgImage } from 'react-icons/cg';
+import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
+import { CgImage } from "react-icons/cg";
 
 const AddEquipment = () => {
   const { currentUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    photoUrl: '',
-    itemName: '',
-    categoryName: '',
-    description: '',
-    price: '',
-    rating: '',
-    customization: 'no',
-    processingTime: '',
-    stockStatus: '1',
+    photoUrl: "",
+    itemName: "",
+    categoryName: "",
+    description: "",
+    price: "",
+    rating: "",
+    customization: "no",
+    processingTime: "",
+    stockStatus: "1",
   });
 
   const handleChange = (e) => {
@@ -32,48 +32,47 @@ const AddEquipment = () => {
       userName: currentUser.displayName,
     };
 
-    fetch('http://localhost:5000/addEquip', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    fetch("https://b10-a10-server-side-roan.vercel.app/addEquip", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userEquipment),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
           Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: 'Equipment added successfully.',
+            icon: "success",
+            title: "Success!",
+            text: "Equipment added successfully.",
             timer: 2000,
             showConfirmButton: false,
           });
           setFormData({
-            photoUrl: '',
-            itemName: '',
-            categoryName: '',
-            description: '',
-            price: '',
-            rating: '',
-            customization: 'no',
-            processingTime: '',
-            stockStatus: '1',
+            photoUrl: "",
+            itemName: "",
+            categoryName: "",
+            description: "",
+            price: "",
+            rating: "",
+            customization: "no",
+            processingTime: "",
+            stockStatus: "1",
           });
         } else {
           Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: data.message || 'Failed to add equipment.',
+            icon: "error",
+            title: "Error!",
+            text: data.message || "Failed to add equipment.",
             timer: 2000,
             showConfirmButton: false,
           });
         }
       })
-      .catch((error) => {
-        console.error("Error:", error);
+      .catch(() => {
         Swal.fire({
-          icon: 'error',
-          title: 'Error!',
-          text: 'Network error. Please try again.',
+          icon: "error",
+          title: "Error!",
+          text: "Network error. Please try again.",
           timer: 2000,
           showConfirmButton: false,
         });
@@ -84,11 +83,20 @@ const AddEquipment = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
       <Helmet>
         <title>Add Equipment | SportsGear</title>
-        <meta name="description" content="Contribute to our community by adding new sports equipment to our catalog." />
+        <meta
+          name="description"
+          content="Contribute to our community by adding new sports equipment to our catalog."
+        />
         <meta property="og:title" content="Add Equipment | SportsGear" />
-        <meta property="og:description" content="Help us enrich our collection with your contributions." />
+        <meta
+          property="og:description"
+          content="Help us enrich our collection with your contributions."
+        />
       </Helmet>
-      <form className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md" onSubmit={handleSubmit}>
+      <form
+        className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md"
+        onSubmit={handleSubmit}
+      >
         <h2 className="text-2xl font-bold mb-6 text-gray-900">Add Equipment</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="mb-4">
@@ -101,7 +109,7 @@ const AddEquipment = () => {
                 type="text"
                 name="photoUrl"
                 value={formData.photoUrl}
-                placeholder='Enter Photo URL'
+                placeholder="Enter Photo URL"
                 className="input input-bordered w-full"
                 onChange={handleChange}
               />
@@ -147,9 +155,7 @@ const AddEquipment = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
-              Price
-            </label>
+            <label className="block text-gray-700 font-bold mb-2">Price</label>
             <input
               type="number"
               step="0.01"
@@ -161,9 +167,7 @@ const AddEquipment = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
-              Rating
-            </label>
+            <label className="block text-gray-700 font-bold mb-2">Rating</label>
             <input
               type="number"
               min="0"

@@ -45,7 +45,7 @@ const Navbar = () => {
             <img src={spLogo} alt="SportsGear Logo" className="h-10 w-10 rounded-full mr-2" />
             SportsGear
           </div>
-          <div className="flex space-x-4 justify-center flex-1 mt-4 sm:mt-0">
+          <div className="flex space-x-4 justify-center flex-1 mt-4 sm:mt-0 text-1xl font-bold">
             <NavLink 
               to="/" 
               className={({ isActive }) => isActive ? "text-yellow-500" : "text-white"}

@@ -18,12 +18,11 @@ const MyEquipmentList = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `http://localhost:5000/equipment/user/${currentUser.email}`
+          `https://b10-a10-server-side-roan.vercel.app/equipment/user/${currentUser.email}`
         );
         const data = await response.json();
         setEquipment(data);
       } catch (error) {
-        console.error("Error fetching equipment:", error);
         Swal.fire({
           title: "Error!",
           text: "Failed to fetch equipment. Please check your network connection and try again.",
@@ -53,9 +52,15 @@ const MyEquipmentList = () => {
     <div className="p-6 bg-gray-100 dark:bg-gray-900">
       <Helmet>
         <title>My Equipment List | SportsGear</title>
-        <meta name="description" content="Manage your personal sports equipment collection here." />
+        <meta
+          name="description"
+          content="Manage your personal sports equipment collection here."
+        />
         <meta property="og:title" content="My Equipment List | SportsGear" />
-        <meta property="og:description" content="View and edit your added sports equipment." />
+        <meta
+          property="og:description"
+          content="View and edit your added sports equipment."
+        />
       </Helmet>
       {isLoading ? (
         <LoadingSpinner />
@@ -107,7 +112,9 @@ const MyEquipmentList = () => {
                 </div>
               ))
             ) : (
-              <p className="text-center dark:text-gray-300">No equipment found.</p>
+              <p className="text-center dark:text-gray-300">
+                No equipment found.
+              </p>
             )}
           </div>
           {deleteItemId && (
@@ -115,10 +122,12 @@ const MyEquipmentList = () => {
               itemId={deleteItemId}
               onClose={() => setDeleteItemId(null)}
               onConfirm={() => {
-                fetch(`http://localhost:5000/equipment/${deleteItemId}`, {
-                  method: "DELETE",
-                })
-                  .then((response) => response.json())
+                fetch(
+                  `https://b10-a10-server-side-roan.vercel.app/equipment/${deleteItemId}`,
+                  {
+                    method: "DELETE",
+                  }
+                )
                   .then(() => {
                     setEquipment((prev) =>
                       prev.filter((item) => item._id !== deleteItemId)
@@ -133,7 +142,6 @@ const MyEquipmentList = () => {
                     });
                   })
                   .catch((error) => {
-                    console.error("Error deleting equipment:", error);
                     Swal.fire({
                       title: "Error!",
                       text: "Failed to delete equipment. Please check your network connection and try again.",

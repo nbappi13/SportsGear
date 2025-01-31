@@ -41,7 +41,6 @@ const Register = () => {
         title: 'Oops...',
         text: 'Something went wrong during registration. Please try again.',
       });
-      console.error(error);
     }
   };
 
@@ -59,13 +58,11 @@ const Register = () => {
 
       navigate('/');
     } catch (error) {
-   
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
         text: 'Google registration failed. Please try again.',
       });
-      console.error(error);
     }
   };
 
@@ -88,7 +85,6 @@ const Register = () => {
         title: 'Oops...',
         text: 'GitHub registration failed. Please try again.',
       });
-      console.error(error);
     }
   };
 

@@ -1,9 +1,16 @@
-# React + Vite
+# SportsGear
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **SportsGear**, your ultimate destination for all sports equipment and accessories. Our platform is designed to provide an exceptional shopping experience for sports enthusiasts. Explore our extensive collection, discover top-rated products, and stay updated with the latest sports events.
 
-Currently, two official plugins are available:
+# Live link:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-"# B10-A10-Client-Side" 
+Live Site link(firebase): https://b10-a10-task.web.app/
+Live Site link(netlify): https://sports-gear.netlify.app/
+
+## Features
+
+- **Comprehensive Product Range**: Browse through a wide variety of sports equipment and accessories, catering to different sports and activities.
+- **Top-rated Products**: Discover the highest-rated products based on customer reviews and ratings.
+- **User-friendly Interface**: Enjoy an intuitive and easy-to-navigate website layout for a seamless shopping experience.
+- **Responsive Design**: Access SportsGear from any device, be it a desktop, tablet, or mobile, with our fully responsive design.
+- **Upcoming Events & Latest Sports News**: Stay updated with the latest sports events and news through our regularly updated blog and events section.

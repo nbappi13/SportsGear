@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import { Fade } from "react-awesome-reveal";
 import LoadingSpinner from "../../components/LoadingSpinner";
@@ -12,14 +12,13 @@ const AllSportsEquipment = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:5000/equipment")
+    fetch("https://b10-a10-server-side-roan.vercel.app/equipment")
       .then((response) => response.json())
       .then((data) => {
         setEquipment(data);
         setIsLoading(false);
       })
-      .catch((error) => {
-        console.error("Error fetching equipment:", error);
+      .catch(() => {
         setIsLoading(false);
       });
   }, []);
@@ -39,10 +38,19 @@ const AllSportsEquipment = () => {
     <div className="p-6 dark:bg-gray-900">
       <Helmet>
         <title>All Sports Equipment | SportsGear</title>
-        <meta name="description" content="Browse our full range of sports equipment categorized by type and brand." />
+        <meta
+          name="description"
+          content="Browse our full range of sports equipment categorized by type and brand."
+        />
         <meta property="og:title" content="All Sports Equipment | SportsGear" />
-        <meta property="og:description" content="Explore our extensive collection of sports gear." />
-        <meta property="og:image" content="/path/to/your/all-equipment-image.jpg" />
+        <meta
+          property="og:description"
+          content="Explore our extensive collection of sports gear."
+        />
+        <meta
+          property="og:image"
+          content="/path/to/your/all-equipment-image.jpg"
+        />
       </Helmet>
       {isLoading ? (
         <LoadingSpinner />
@@ -97,17 +105,27 @@ const AllSportsEquipment = () => {
                         </span>
                         <Tooltip id="item-tooltip" />
                       </td>
-                      <td className="py-3 px-4 dark:text-gray-300">{item.categoryName}</td>
-                      <td className="py-3 px-4 dark:text-gray-300">${item.price}</td>
-                      <td className="py-3 px-4 dark:text-gray-300">{item.rating} ⭐</td>
+                      <td className="py-3 px-4 dark:text-gray-300">
+                        {item.categoryName}
+                      </td>
+                      <td className="py-3 px-4 dark:text-gray-300">
+                        ${item.price}
+                      </td>
+                      <td className="py-3 px-4 dark:text-gray-300">
+                        {item.rating} ⭐
+                      </td>
                       <td className="py-3 px-4 dark:text-gray-300">
                         {item.customization === "yes" ? "Yes" : "No"}
                       </td>
                       <td className="py-3 px-4 dark:text-gray-300">
                         {item.stockStatus === "1" ? (
-                          <span className="text-green-600 dark:text-green-600">In Stock</span>
+                          <span className="text-green-600 dark:text-green-600">
+                            In Stock
+                          </span>
                         ) : (
-                          <span className="text-red-600 dark:text-red-600">Out of Stock</span>
+                          <span className="text-red-600 dark:text-red-600">
+                            Out of Stock
+                          </span>
                         )}
                       </td>
                       <td className="py-3 px-4">

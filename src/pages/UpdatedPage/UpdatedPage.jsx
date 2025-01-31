@@ -1,34 +1,33 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
-import Swal from 'sweetalert2';
+import React, { useState, useEffect, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import Swal from "sweetalert2";
 
 const UpdatedPage = () => {
   const { currentUser } = useContext(AuthContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const [equipment, setEquipment] = useState({
-    itemName: '',
-    categoryName: '',
-    price: '',
-    rating: '',
-    customization: 'no',
-    stockStatus: '1',
-    photoUrl: '',
-    description: '',
+    itemName: "",
+    categoryName: "",
+    price: "",
+    rating: "",
+    customization: "no",
+    stockStatus: "1",
+    photoUrl: "",
+    description: "",
   });
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:5000/equipment/${id}`)
+      fetch(`https://b10-a10-server-side-roan.vercel.app/equipment/${id}`)
         .then((response) => response.json())
         .then((data) => setEquipment(data))
-        .catch((error) => {
-          console.error("Error fetching equipment:", error);
+        .catch(() => {
           Swal.fire({
-            title: 'Error!',
-            text: 'Failed to fetch equipment. Please check your network connection and try again.',
-            icon: 'error',
+            title: "Error!",
+            text: "Failed to fetch equipment. Please check your network connection and try again.",
+            icon: "error",
             timer: 3000,
             showConfirmButton: false,
           });
@@ -46,10 +45,10 @@ const UpdatedPage = () => {
 
     const updatedData = { ...equipment };
 
-    fetch(`http://localhost:5000/equipment/${id}`, {
-      method: 'PUT',
+    fetch(`https://b10-a10-server-side-roan.vercel.app/equipment/${id}`, {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedData),
     })
@@ -57,30 +56,29 @@ const UpdatedPage = () => {
       .then((data) => {
         if (data.success) {
           Swal.fire({
-            title: 'Success!',
-            text: 'Equipment updated successfully!',
-            icon: 'success',
+            title: "Success!",
+            text: "Equipment updated successfully!",
+            icon: "success",
             timer: 3000,
             showConfirmButton: false,
           }).then(() => {
-            navigate('/my-equipment-list');
+            navigate("/my-equipment-list");
           });
         } else {
           Swal.fire({
-            title: 'Error!',
-            text: data.message || 'Failed to update equipment.',
-            icon: 'error',
+            title: "Error!",
+            text: data.message || "Failed to update equipment.",
+            icon: "error",
             timer: 3000,
             showConfirmButton: false,
           });
         }
       })
-      .catch((error) => {
-        console.error("Error updating equipment:", error);
+      .catch(() => {
         Swal.fire({
-          title: 'Error!',
-          text: 'Network error. Please check your connection and try again.',
-          icon: 'error',
+          title: "Error!",
+          text: "Network error. Please check your connection and try again.",
+          icon: "error",
           timer: 3000,
           showConfirmButton: false,
         });
@@ -94,7 +92,10 @@ const UpdatedPage = () => {
   return (
     <div className="p-6 bg-gray-100">
       <h2 className="text-3xl font-bold mb-6 text-center">Update Equipment</h2>
-      <form onSubmit={handleSubmit} className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-lg grid grid-cols-2 gap-4">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-lg mx-auto bg-white p-6 shadow-md rounded-lg grid grid-cols-2 gap-4"
+      >
         <div className="col-span-2">
           <label className="block text-gray-700 font-bold mb-2">
             User Email
@@ -132,9 +133,7 @@ const UpdatedPage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">
-            Category
-          </label>
+          <label className="block text-gray-700 font-bold mb-2">Category</label>
           <input
             type="text"
             name="categoryName"
@@ -144,9 +143,7 @@ const UpdatedPage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">
-            Price
-          </label>
+          <label className="block text-gray-700 font-bold mb-2">Price</label>
           <input
             type="number"
             name="price"
@@ -156,9 +153,7 @@ const UpdatedPage = () => {
           />
         </div>
         <div>
-          <label className="block text-gray-700 font-bold mb-2">
-            Rating
-          </label>
+          <label className="block text-gray-700 font-bold mb-2">Rating</label>
           <input
             type="number"
             name="rating"
