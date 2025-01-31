@@ -5,7 +5,7 @@ Welcome to **SportsGear**, your ultimate destination for all sports equipment an
 # Live link:
 
 Live Site link(firebase): https://b10-a10-task.web.app/
-Live Site link(netlify): https://sports-gear.netlify.app/
+
 
 ## Features
 
