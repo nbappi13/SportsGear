@@ -1,0 +1,45 @@
+
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .equipment-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.equipment-card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #e5e7eb;
+}
+
+.equipment-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 767px) {
+  .equipment-card:nth-child(n+5) {
+    display: none;
+  }
+}
+
+@media (min-width: 1280px) {
+  .equipment-grid {
+    grid-template-columns: repeat(5, 1fr);
+ 
+  }
+  .equipment-card:nth-child(n + 6) {
+    display: none;
+  }
+}
