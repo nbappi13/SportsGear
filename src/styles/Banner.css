@@ -2,9 +2,9 @@
 .banner-img-main {
     display: none; 
     width: 23%;
-    height: 90%;
+    height: 100%;
     position: absolute;
-    top: 10%;
+    /* top: 10%; */
     left: 11%;
     object-fit: cover;
     z-index: 20; 
