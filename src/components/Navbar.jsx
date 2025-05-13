@@ -1,71 +1,85 @@
-"use client"
+"use client";
 
-import { useContext, useState } from "react"
-import { NavLink, useLocation, useNavigate } from "react-router-dom"
-import { AuthContext } from "../context/AuthContext"
-import { CartContext } from "../context/CartContext"
-import { useThemeContext } from "../context/ThemeContext"
-import spLogo from "../assets/SportsGear logo.png"
+import { useContext, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { CartContext } from "../context/CartContext";
+import { useThemeContext } from "../context/ThemeContext";
+import spLogo from "../assets/SportsGear logo.png";
 
 const Navbar = () => {
-  const { currentUser, logout } = useContext(AuthContext)
-  const { cartItems } = useContext(CartContext)
-  const { theme, toggleTheme } = useThemeContext()
-  const location = useLocation()
-  const navigate = useNavigate()
-  const [showSearch, setShowSearch] = useState(false)
-  const [showDashboardMenu, setShowDashboardMenu] = useState(false)
+  const { currentUser, logout } = useContext(AuthContext);
+  const { cartItems } = useContext(CartContext);
+  const { theme, toggleTheme } = useThemeContext();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [showSearch, setShowSearch] = useState(false);
+  const [showDashboardMenu, setShowDashboardMenu] = useState(false);
 
-  const isHomePage = location.pathname === "/"
-  const navbarColor = isHomePage ? "bg-gray-800" : theme === "dark" ? "bg-gray-900" : "bg-blue-600"
+  const isHomePage = location.pathname === "/";
+  const navbarColor = isHomePage
+    ? "bg-gray-800"
+    : theme === "dark"
+    ? "bg-gray-900"
+    : "bg-blue-600";
 
   const handleHomeClick = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     if (location.pathname === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" })
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      navigate("/")
+      navigate("/");
     }
-  }
+  };
 
   const handleBuyNowClick = () => {
-    navigate("/")
+    navigate("/");
     setTimeout(() => {
-      document.getElementById("products-section").scrollIntoView({ behavior: "smooth" })
-    }, 100)
-  }
+      document
+        .getElementById("products-section")
+        .scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
 
   const toggleSearch = () => {
-    setShowSearch(!showSearch)
-  }
+    setShowSearch(!showSearch);
+  };
 
   const toggleDashboardMenu = () => {
-    setShowDashboardMenu(!showDashboardMenu)
-  }
+    setShowDashboardMenu(!showDashboardMenu);
+  };
 
   const closeDashboardMenu = () => {
-    setShowDashboardMenu(false)
-  }
+    setShowDashboardMenu(false);
+  };
 
   return (
     <div className="sticky top-0 z-50">
       <nav className={`${navbarColor} p-4`}>
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
           <div className="flex items-center text-white font-bold text-2xl mb-4 sm:mb-0">
-            <img src={spLogo || "/placeholder.svg"} alt="SportsGear Logo" className="h-10 w-10 rounded-full mr-2" />
+            <img
+              src={spLogo || "/placeholder.svg"}
+              alt="SportsGear Logo"
+              className="h-10 w-10 rounded-full mr-2"
+            />
             SportsGear
           </div>
           <div className="flex space-x-4 justify-center flex-1 mt-4 sm:mt-0 text-1xl font-bold">
             <NavLink
               to="/"
-              className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white")}
+              className={({ isActive }) =>
+                isActive ? "text-yellow-500" : "text-white"
+              }
               onClick={handleHomeClick}
             >
               Home
             </NavLink>
             <NavLink
               to="/all-sports-equipment"
-              className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white")}
+              className={({ isActive }) =>
+                isActive ? "text-yellow-500" : "text-white"
+              }
             >
               Equipments
             </NavLink>
@@ -82,7 +96,6 @@ const Navbar = () => {
                   />
                 )}
 
-               
                 <div className="relative inline-block text-left ml-2">
                   <button
                     onClick={toggleDashboardMenu}
@@ -90,33 +103,44 @@ const Navbar = () => {
                   >
                     Dashboard
                     <svg
-                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${showDashboardMenu ? "rotate-180" : ""}`}
+                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${
+                        showDashboardMenu ? "rotate-180" : ""
+                      }`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                       xmlns="http://www.w3.org/2000/svg"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 9l-7 7-7-7"
+                      />
                     </svg>
                   </button>
 
-                 
                   {showDashboardMenu && (
                     <>
-                 
-                      <div className="fixed inset-0 z-10" onClick={closeDashboardMenu}></div>
-
-                    
                       <div
-                        className="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-20"
+                        className="fixed inset-0 z-10"
+                        onClick={closeDashboardMenu}
+                      ></div>
+
+                      <div
+                        className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-20`}
                         style={{
-                          transform: "translateX(-15%)",
-                          "@media (max-width: 640px)": {
-                            transform: "translateX(-25%)",
-                          },
+                          transform:
+                            window.innerWidth < 640
+                              ? "translateX(29%)"
+                              : "translateX(0)", 
                         }}
                       >
-                        <div className="py-1" role="menu" aria-orientation="vertical">
+                        <div
+                          className="py-1"
+                          role="menu"
+                          aria-orientation="vertical"
+                        >
                           <NavLink
                             to="/add-equipment"
                             className={({ isActive }) =>
@@ -158,15 +182,28 @@ const Navbar = () => {
               </div>
             ) : (
               <>
-                <NavLink to="/login" className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white")}>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? "text-yellow-500" : "text-white"
+                  }
+                >
                   Login
                 </NavLink>
-                <NavLink to="/register" className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white")}>
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) =>
+                    isActive ? "text-yellow-500" : "text-white"
+                  }
+                >
                   Register
                 </NavLink>
               </>
             )}
-            <button className="hidden sm:block text-white" onClick={toggleSearch}>
+            <button
+              className="hidden sm:block text-white"
+              onClick={toggleSearch}
+            >
               🔍
             </button>
             {showSearch && (
@@ -179,7 +216,9 @@ const Navbar = () => {
             )}
             <NavLink
               to="/cart"
-              className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white") + " relative"}
+              className={({ isActive }) =>
+                (isActive ? "text-yellow-500" : "text-white") + " relative"
+              }
             >
               <div className="flex items-center">
                 <span className="text-3xl">🛒</span>
@@ -203,7 +242,7 @@ const Navbar = () => {
         </div>
       </nav>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
