@@ -22,6 +22,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import SpecialDeals from "./pages/SpecialDeals/SpecialDeals";
 import AddSpecialDeal from "./pages/AddSpecialDeal/AddSpecialDeal";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import HandleSpecialDeals from "./pages/HandleSpecialDeals/HandleSpecialDeals";
 
 
 const App = () => {
@@ -99,6 +100,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <AddSpecialDeal />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/handle-special-deals"
+            element={
+              <PrivateRoute>
+                <HandleSpecialDeals />
               </PrivateRoute>
             }
           />

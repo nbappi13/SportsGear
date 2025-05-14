@@ -189,6 +189,19 @@ const Navbar = () => {
                             Add Special Deal
                           </NavLink>
                           <NavLink
+                            to="/handle-special-deals"
+                            className={({ isActive }) =>
+                              `block px-4 py-2 text-sm ${
+                                isActive
+                                  ? "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
+                                  : "text-gray-700 dark:text-gray-200"
+                              } hover:bg-gray-100 dark:hover:bg-gray-700`
+                            }
+                            onClick={closeDashboardMenu}
+                          >
+                            Handle Special Deals
+                          </NavLink>
+                          <NavLink
                             to="/profile"
                             className={({ isActive }) =>
                               `block px-4 py-2 text-sm ${
