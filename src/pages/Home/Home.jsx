@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
-import Banner from "./Banner";
-import EquipmentCards from "../../components/EquipmentCards";
-import TopRatedProducts from "./TopRatedProducts";
-import UpcomingEvents from "./UpcomingEvents";
+"use client"
+
+import { useEffect, useState } from "react"
+import { Helmet } from "react-helmet"
+import Banner from "./Banner"
+import EquipmentCards from "../../components/EquipmentCards"
+import TopRatedProducts from "./TopRatedProducts"
+import UpcomingEvents from "./UpcomingEvents"
+import DealsHeroSection from "../../components/DealsHeroSection"
 
 const Home = () => {
-  const [equipment, setEquipment] = useState([]);
+  const [equipment, setEquipment] = useState([])
 
   useEffect(() => {
     fetch("https://b10-a10-server-side-roan.vercel.app/equipment/home")
       .then((response) => response.json())
       .then((data) => {
-        setEquipment(data);
+        setEquipment(data)
       })
-      .catch(() => {});
-  }, []);
+      .catch(() => {})
+  }, [])
 
   return (
     <div id="home-page">
       <Helmet>
         <title>Home | SportsGear</title>
-        <meta
-          name="description"
-          content="Welcome to SportsGear - Your one-stop shop for all sports equipment!"
-        />
+        <meta name="description" content="Welcome to SportsGear - Your one-stop shop for all sports equipment!" />
         <meta property="og:title" content="Home | SportsGear" />
         <meta
           property="og:description"
@@ -38,9 +38,10 @@ const Home = () => {
         <EquipmentCards equipment={equipment} />
       </div>
       <TopRatedProducts />
+      <DealsHeroSection />
       <UpcomingEvents />
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

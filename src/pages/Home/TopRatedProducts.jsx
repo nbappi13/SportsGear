@@ -21,9 +21,9 @@ const TopRatedProducts = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-100 dark:bg-gray-900">
+    <div className="p-6 pb-16 bg-gray-100 dark:bg-gray-900">
       <h2 className="text-4xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">
-        Top-rated Products
+        Top-rated Best Sellers
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 justify-center">
         {topRated.slice(0, 5).map((product, index) => (
