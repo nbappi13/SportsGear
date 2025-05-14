@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Typography,
-  Button,
-} from "@material-tailwind/react";
 
 const TopRatedProducts = () => {
   const [topRated, setTopRated] = useState([]);
@@ -19,7 +12,7 @@ const TopRatedProducts = () => {
         setTopRated(data);
       })
       .catch(() => {
-        // Handle error silently
+        
       });
   }, []);
 
@@ -32,36 +25,31 @@ const TopRatedProducts = () => {
       <h2 className="text-4xl font-bold mb-6 text-center text-gray-900 dark:text-gray-100">
         Top-rated Products
       </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {topRated.map((product, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 justify-center">
+        {topRated.slice(0, 5).map((product, index) => (
           <div
             key={index}
-            className="group relative rounded-full overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform duration-300 mx-auto"
-            style={{ width: "250px", height: "250px" }}
+            className="group flex flex-col items-center cursor-pointer"
+            onClick={() => handleViewDetails(product._id)}
           >
-            <img
-              src={product.photoUrl}
-              alt={product.itemName}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 dark:bg-opacity-50 group-hover:bg-opacity-70 transition-all duration-300 rounded-full">
-              <Button
-                variant="gradient"
-                color="blue"
-                onClick={() => handleViewDetails(product._id)}
-                className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-                View Details
-              </Button>
+         
+            <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-lg hover:shadow-2xl transform hover:scale-105 transition-transform duration-300 bg-white">
+              <img
+                src={product.photoUrl}
+                alt={product.itemName}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+              />
+           
+              <div className="absolute inset-0 flex items-center justify-center bg-slate-100 bg-opacity-10 group-hover:bg-opacity-30 transition-all duration-300 rounded-full">
+                <button className="opacity-0 group-hover:opacity-100 text-white bg-gradient-to-r from-blue-500 to-purple-500 px-4 py-2 rounded-full transition-opacity duration-300">
+                  View Details
+                </button>
+              </div>
             </div>
-            <div className="absolute bottom-0 left-0 right-0 text-center p-4 bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 group-hover:bg-opacity-100 transition-all duration-300">
-              <Typography
-                variant="h5"
-                className="font-semibold text-gray-900 dark:text-gray-100"
-              >
-                {product.itemName}
-              </Typography>
-            </div>
+          
+            <p className="mt-4 text-center text-gray-900 dark:text-gray-100 font-semibold">
+              {product.itemName}
+            </p>
           </div>
         ))}
       </div>
