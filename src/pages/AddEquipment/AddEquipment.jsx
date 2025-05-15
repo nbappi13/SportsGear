@@ -80,7 +80,7 @@ const AddEquipment = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100 p-6">
+    <div className="flex justify-center items-center min-h-screen bg-gray-100 dark:bg-gray-900 p-6">
       <Helmet>
         <title>Add Equipment | SportsGear</title>
         <meta
@@ -94,13 +94,14 @@ const AddEquipment = () => {
         />
       </Helmet>
       <form
-        className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md"
+        className="w-full max-w-4xl bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md"
         onSubmit={handleSubmit}
       >
-        <h2 className="text-2xl font-bold mb-6 text-gray-900">Add Equipment</h2>
+        <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Add Equipment</h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+       
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
               Photo URL
             </label>
             <div className="flex items-center">
@@ -110,64 +111,69 @@ const AddEquipment = () => {
                 name="photoUrl"
                 value={formData.photoUrl}
                 placeholder="Enter Photo URL"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
                 onChange={handleChange}
               />
             </div>
           </div>
 
+         
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
               Item Name
             </label>
             <input
               type="text"
               name="itemName"
               value={formData.itemName}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
               onChange={handleChange}
             />
           </div>
 
+        
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
               Category Name
             </label>
             <input
               type="text"
               name="categoryName"
               value={formData.categoryName}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
               onChange={handleChange}
             />
           </div>
 
+        
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
               Description
             </label>
             <textarea
               name="description"
               value={formData.description}
-              className="textarea textarea-bordered w-full"
+              className="textarea textarea-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
               onChange={handleChange}
             />
           </div>
 
+       
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">Price</label>
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">Price</label>
             <input
               type="number"
               step="0.01"
               name="price"
               value={formData.price}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
               onChange={handleChange}
             />
           </div>
 
+      
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">Rating</label>
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">Rating</label>
             <input
               type="number"
               min="0"
@@ -175,48 +181,51 @@ const AddEquipment = () => {
               step="0.1"
               name="rating"
               value={formData.rating}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
               onChange={handleChange}
             />
           </div>
 
+         
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
               Customization
             </label>
             <select
               name="customization"
               value={formData.customization}
               onChange={handleChange}
-              className="select select-bordered w-full"
+              className="select select-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
             >
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </div>
 
+        
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
               Processing Time
             </label>
             <input
               type="text"
               name="processingTime"
               value={formData.processingTime}
-              className="input input-bordered w-full"
+              className="input input-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
               onChange={handleChange}
             />
           </div>
 
+       
           <div className="mb-4">
-            <label className="block text-gray-700 font-bold mb-2">
+            <label className="block text-gray-700 dark:text-gray-300 font-bold mb-2">
               Stock Status
             </label>
             <select
               name="stockStatus"
               value={formData.stockStatus}
               onChange={handleChange}
-              className="select select-bordered w-full"
+              className="select select-bordered w-full text-gray-900 dark:text-white dark:bg-gray-700"
             >
               <option value="1">In Stock</option>
               <option value="0">Out of Stock</option>
@@ -224,6 +233,7 @@ const AddEquipment = () => {
           </div>
         </div>
 
+      
         <div className="mt-6">
           <button type="submit" className="btn btn-primary w-full">
             Add Equipment
