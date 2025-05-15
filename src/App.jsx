@@ -23,6 +23,8 @@ import SpecialDeals from "./pages/SpecialDeals/SpecialDeals";
 import AddSpecialDeal from "./pages/AddSpecialDeal/AddSpecialDeal";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import HandleSpecialDeals from "./pages/HandleSpecialDeals/HandleSpecialDeals";
+import AboutUs from "./pages/AboutUs";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 
 const App = () => {
@@ -111,6 +113,8 @@ const App = () => {
               </PrivateRoute>
             }
           />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />
