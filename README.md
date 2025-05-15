@@ -85,8 +85,8 @@ npm run dev
 **Navigate to the server directory:**
 
 ```bash
-git clone https://github.com/nbappi13/SportsGear-server.git
-cd SportsGear-server
+Go to the server directory
+cd server
 ```
 
 **Install server dependencies:**
