@@ -62,8 +62,8 @@ You can access the live site [here](https://sports-gear.netlify.app/).
 **Clone the repository:**
 
 ```bash
-git clone https://github.com/nbappi13/B10-A10-Client-Side.git
-cd B10-A10-Client-Side
+git clone https://github.com/nbappi13/SportsGear.git
+cd SportsGear
 ```
 
 **Install dependencies:**
@@ -85,7 +85,8 @@ npm run dev
 **Navigate to the server directory:**
 
 ```bash
-cd B10-A10-Server-Side
+git clone https://github.com/nbappi13/SportsGear-server.git
+cd SportsGear-server
 ```
 
 **Install server dependencies:**
@@ -110,4 +111,6 @@ node index.js
 * Register or login via Firebase
 * Browse sports equipment and accessories
 * Add products to your cart and make purchases
+
+
 
