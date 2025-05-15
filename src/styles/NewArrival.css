@@ -1,0 +1,29 @@
+.new-arrivals-container {
+  display: grid;
+  gap: 1rem;
+}
+
+
+@media (max-width: 639px) {
+  .new-arrivals-container {
+    grid-template-columns: 1fr;
+  }
+
+  .new-arrivals-container > div:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .new-arrivals-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+
+@media (min-width: 1024px) {
+  .new-arrivals-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

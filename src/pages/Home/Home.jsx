@@ -5,8 +5,10 @@ import { Helmet } from "react-helmet"
 import Banner from "./Banner"
 import EquipmentCards from "../../components/EquipmentCards"
 import TopRatedProducts from "./TopRatedProducts"
+
 import UpcomingEvents from "./UpcomingEvents"
 import DealsHeroSection from "../../components/DealsHeroSection"
+import NewArrivals from "./NewArrival"
 
 const Home = () => {
   const [equipment, setEquipment] = useState([])
@@ -39,6 +41,7 @@ const Home = () => {
       </div>
       <TopRatedProducts />
       <DealsHeroSection />
+      <NewArrivals />
       <UpcomingEvents />
     </div>
   )
