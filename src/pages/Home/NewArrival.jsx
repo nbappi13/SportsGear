@@ -1,75 +1,73 @@
-"use client"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import "../../styles/NewArrival.css"
+"use client";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../styles/NewArrival.css";
 
 const NewArrivals = () => {
-  const [newArrivals, setNewArrivals] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-  const navigate = useNavigate()
+  const [newArrivals, setNewArrivals] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true)
-    setError(false)
+    setLoading(true);
+    setError(false);
 
-    
-
-   
-    fetch("http://localhost:5000/equipment/new-arrivals")
+    fetch("https://b10-a10-server-side-roan.vercel.app/equipment/new-arrivals")
       .then((response) => {
-      
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`)
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json()
+        return response.json();
       })
       .then((data) => {
-       
-      
         if (Array.isArray(data)) {
-          setNewArrivals(data)
+          setNewArrivals(data);
         } else {
-       
-          setNewArrivals([])
-          setError(true)
+          setNewArrivals([]);
+          setError(true);
         }
-        setLoading(false)
+        setLoading(false);
       })
       .catch((error) => {
-     
-        setNewArrivals([])
-        setError(true)
-        setLoading(false)
-      })
-  }, [])
+        setNewArrivals([]);
+        setError(true);
+        setLoading(false);
+      });
+  }, []);
 
   const handleViewDetails = (id) => {
-    navigate(`/viewdetails/${id}`)
-  }
+    navigate(`/viewdetails/${id}`);
+  };
 
   if (loading) {
     return (
       <div className="py-12 px-4 md:px-8 bg-gray-50 dark:bg-gray-900 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-800 dark:text-gray-100">New Arrivals</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-800 dark:text-gray-100">
+          New Arrivals
+        </h2>
         <div className="flex justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
         </div>
       </div>
-    )
+    );
   }
 
   if (error) {
     return (
       <div className="py-12 px-4 md:px-8 bg-gray-50 dark:bg-gray-900 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-800 dark:text-gray-100">New Arrivals</h2>
-        <p className="text-red-500">Unable to load new arrivals. Please try again later.</p>
+        <h2 className="text-3xl md:text-4xl font-bold mb-8 text-gray-800 dark:text-gray-100">
+          New Arrivals
+        </h2>
+        <p className="text-red-500">
+          Unable to load new arrivals. Please try again later.
+        </p>
       </div>
-    )
+    );
   }
 
   if (!newArrivals || newArrivals.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -78,7 +76,8 @@ const NewArrivals = () => {
         New Arrivals
       </h2>
       <p className="text-center text-gray-600 dark:text-gray-300 mb-6 md:mb-10 max-w-3xl mx-auto text-sm md:text-base">
-        Check out our latest additions to the collection. Be the first to get your hands on these fresh arrivals!
+        Check out our latest additions to the collection. Be the first to get
+        your hands on these fresh arrivals!
       </p>
 
       <div className="overflow-hidden">
@@ -99,7 +98,11 @@ const NewArrivals = () => {
                 </div>
                 {item.originalPrice && (
                   <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                    {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% OFF
+                    {Math.round(
+                      ((item.originalPrice - item.price) / item.originalPrice) *
+                        100
+                    )}
+                    % OFF
                   </div>
                 )}
               </div>
@@ -119,10 +122,14 @@ const NewArrivals = () => {
                         <p className="text-gray-500 dark:text-gray-400 line-through text-xs sm:text-sm mr-2">
                           ${item.originalPrice}
                         </p>
-                        <p className="text-red-600 dark:text-red-400 font-bold text-sm sm:text-base">${item.price}</p>
+                        <p className="text-red-600 dark:text-red-400 font-bold text-sm sm:text-base">
+                          ${item.price}
+                        </p>
                       </>
                     ) : (
-                      <p className="text-gray-700 dark:text-gray-300 font-bold text-sm sm:text-base">${item.price}</p>
+                      <p className="text-gray-700 dark:text-gray-300 font-bold text-sm sm:text-base">
+                        ${item.price}
+                      </p>
                     )}
                   </div>
 
@@ -132,7 +139,9 @@ const NewArrivals = () => {
                         <svg
                           key={i}
                           className={`w-3 h-3 sm:w-4 sm:h-4 ${
-                            i < Math.floor(item.rating) ? "text-yellow-400" : "text-gray-300"
+                            i < Math.floor(item.rating)
+                              ? "text-yellow-400"
+                              : "text-gray-300"
                           }`}
                           fill="currentColor"
                           viewBox="0 0 20 20"
@@ -141,7 +150,9 @@ const NewArrivals = () => {
                         </svg>
                       ))}
                     </div>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">({item.rating})</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
+                      ({item.rating})
+                    </span>
                   </div>
 
                   <button
@@ -161,7 +172,7 @@ const NewArrivals = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default NewArrivals
+export default NewArrivals;

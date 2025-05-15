@@ -14,7 +14,7 @@ const HandleSpecialDeals = () => {
       setIsLoading(true);
       try {
         const response = await fetch(
-          "http://localhost:5000/special-deals"
+          "https://b10-a10-server-side-roan.vercel.app/special-deals"
         );
         const data = await response.json();
         setSpecialDeals(data);
@@ -37,7 +37,7 @@ const HandleSpecialDeals = () => {
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/special-deals/${id}`,
+        `https://b10-a10-server-side-roan.vercel.app/special-deals/${id}`,
         {
           method: "DELETE",
         }
