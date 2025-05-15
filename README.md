@@ -1,16 +1,113 @@
 # SportsGear
 
-Welcome to **SportsGear**, your ultimate destination for all sports equipment and accessories. Our platform is designed to provide an exceptional shopping experience for sports enthusiasts. Explore our extensive collection, discover top-rated products, and stay updated with the latest sports events.
+Welcome to **SportsGear**! This project is an e-commerce platform for sports equipment and accessories, built with React and Vite on the client-side, and Express.js and MongoDB on the server-side. The application provides a smooth and responsive experience for browsing and purchasing sports gear.
 
-# Live link:
+## Purpose
 
-Live Site link(firebase): https://b10-a10-task.web.app/
+The purpose of this project is to create a reliable and user-friendly platform where users can explore, manage, and purchase a wide range of sports products. The application is optimized for performance, responsiveness, and accessibility across devices.
 
+## Live URL
 
-## Features
+You can access the live site [here](https://sports-gear.netlify.app/).
 
-- **Comprehensive Product Range**: Browse through a wide variety of sports equipment and accessories, catering to different sports and activities.
-- **Top-rated Products**: Discover the highest-rated products based on customer reviews and ratings.
-- **User-friendly Interface**: Enjoy an intuitive and easy-to-navigate website layout for a seamless shopping experience.
-- **Responsive Design**: Access SportsGear from any device, be it a desktop, tablet, or mobile, with our fully responsive design.
-- **Upcoming Events & Latest Sports News**: Stay updated with the latest sports events and news through our regularly updated blog and events section.
+## Key Features
+
+* **User Authentication**: Secure login and registration using Firebase Authentication.
+* **Product Management**: Add, update, and delete sports items (admin functionality).
+* **Purchase Functionality**: Smooth add-to-cart and checkout experience for users.
+* **Responsive Design**: Fully responsive UI for desktop, tablet, and mobile devices.
+* **Modern UI/UX**: Stylish and interactive interface using Tailwind CSS and DaisyUI.
+* **Lottie Animations**: Visually appealing animations for better user engagement.
+* **Notifications**: Real-time feedback and alerts using React Toastify and SweetAlert2.
+
+## Technologies Used
+
+### Client-Side
+
+* **React**: Frontend JavaScript library for building user interfaces.
+* **Vite**: Lightweight and fast build tool and dev server.
+* **Firebase**: Backend services for authentication and hosting.
+* **React Router DOM**: For client-side routing.
+* **Axios**: For making HTTP requests to the backend.
+* **Tailwind CSS**: Utility-first CSS framework for design.
+* **DaisyUI**: UI components for Tailwind CSS.
+* **SweetAlert2**: Customizable alert popups.
+* **React Toastify**: Toast notification system.
+* **Lottie React**: Render animations in React.
+* **React Slick**: Slider component for product displays.
+* **React Icons**: Icon components.
+* **Styled-Components**: Write CSS in JS.
+* **React Helmet**: Manage document head for SEO.
+
+### Server-Side
+
+* **Express.js**: Node.js framework for building APIs.
+* **MongoDB**: NoSQL database for storing product and user data.
+* **Cors**: Middleware to allow cross-origin requests.
+* **Dotenv**: Loads environment variables from `.env`.
+
+## Getting Started
+
+### ⚙ Prerequisites
+
+* Node.js and npm installed
+* MongoDB Atlas account or local MongoDB setup
+* Firebase project for authentication
+* Git installed
+
+---
+
+### 🚀 Client Setup
+
+**Clone the repository:**
+
+```bash
+git clone https://github.com/nbappi13/B10-A10-Client-Side.git
+cd B10-A10-Client-Side
+```
+
+**Install dependencies:**
+
+```bash
+npm install
+```
+
+**Run the client:**
+
+```bash
+npm run dev
+```
+
+---
+
+### 🔧 Server Setup
+
+**Navigate to the server directory:**
+
+```bash
+cd B10-A10-Server-Side
+```
+
+**Install server dependencies:**
+
+```bash
+npm install
+```
+
+**Start the server:**
+
+```bash
+node index.js
+```
+
+---
+
+## Usage
+
+### 👤 As a User:
+
+* Visit the [live site](https://sports-gear.netlify.app/)
+* Register or login via Firebase
+* Browse sports equipment and accessories
+* Add products to your cart and make purchases
+
