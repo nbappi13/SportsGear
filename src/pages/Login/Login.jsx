@@ -1,81 +1,83 @@
-import React, { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
-import Swal from 'sweetalert2';
+"use client"
+
+import { useState, useContext } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { AuthContext } from "../../context/AuthContext"
+import Swal from "sweetalert2"
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const { login, loginWithGoogle, loginWithGitHub } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const { login, loginWithGoogle, loginWithGitHub } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      await login(email, password);
+      await login(email, password)
 
       Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        text: 'Welcome back!',
+        icon: "success",
+        title: "Login Successful",
+        text: "Welcome back!",
         timer: 2000,
         showConfirmButton: false,
-      });
+      })
 
-      navigate('/');
+      navigate("/")
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Incorrect credentials. Please try again.',
-      });
+        icon: "error",
+        title: "Oops...",
+        text: "Incorrect credentials. Please try again.",
+      })
     }
-  };
+  }
 
   const handleGoogleLogin = async () => {
     try {
-      await loginWithGoogle();
+      await loginWithGoogle()
 
       Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        text: 'Welcome back via Google!',
+        icon: "success",
+        title: "Login Successful",
+        text: "Welcome back via Google!",
         timer: 2000,
         showConfirmButton: false,
-      });
+      })
 
-      navigate('/');
+      navigate("/")
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Google login failed. Please try again.',
-      });
+        icon: "error",
+        title: "Oops...",
+        text: "Google login failed. Please try again.",
+      })
     }
-  };
+  }
 
   const handleGitHubLogin = async () => {
     try {
-      await loginWithGitHub();
+      await loginWithGitHub()
 
       Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        text: 'Welcome back via GitHub!',
+        icon: "success",
+        title: "Login Successful",
+        text: "Welcome back via GitHub!",
         timer: 2000,
         showConfirmButton: false,
-      });
+      })
 
-      navigate('/');
+      navigate("/")
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'GitHub login failed. Please try again.',
-      });
+        icon: "error",
+        title: "Oops...",
+        text: "GitHub login failed. Please try again.",
+      })
     }
-  };
+  }
 
   return (
     <div
@@ -98,7 +100,7 @@ const Login = () => {
 
           <div className="relative w-full">
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -109,7 +111,7 @@ const Login = () => {
               className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? '🙈' : '👁️'}
+              {showPassword ? "🙈" : "👁️"}
             </button>
           </div>
 
@@ -119,29 +121,23 @@ const Login = () => {
         </form>
 
         <div className="mt-4 flex justify-between gap-2 flex-wrap">
-          <button
-            onClick={handleGoogleLogin}
-            className="flex-1 bg-red-500 text-white p-2 rounded"
-          >
+          <button onClick={handleGoogleLogin} className="flex-1 bg-red-500 text-white p-2 rounded">
             Google
           </button>
-          <button
-            onClick={handleGitHubLogin}
-            className="flex-1 bg-gray-800 text-white p-2 rounded"
-          >
+          <button onClick={handleGitHubLogin} className="flex-1 bg-gray-800 text-white p-2 rounded">
             GitHub
           </button>
         </div>
 
         <p className="mt-4 text-center text-sm text-gray-700 dark:text-gray-300">
-          Don't have an account?{' '}
+          Don't have an account?{" "}
           <Link to="/register" className="text-blue-500 font-medium">
             Create one!
           </Link>
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

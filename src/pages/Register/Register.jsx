@@ -1,88 +1,90 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
-import Swal from 'sweetalert2';
+"use client"
+
+import { useState, useContext } from "react"
+import { useNavigate, Link } from "react-router-dom"
+import { AuthContext } from "../../context/AuthContext"
+import Swal from "sweetalert2"
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [photoURL, setPhotoURL] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const { register, loginWithGoogle, loginWithGitHub } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [photoURL, setPhotoURL] = useState("")
+  const [password, setPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const { register, loginWithGoogle, loginWithGitHub } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    e.preventDefault()
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/
     if (!passwordRegex.test(password)) {
       Swal.fire({
-        icon: 'error',
-        title: 'Invalid Password',
-        text: 'Password must contain uppercase, lowercase letters, and be at least 6 characters long.',
-      });
-      return;
+        icon: "error",
+        title: "Invalid Password",
+        text: "Password must contain uppercase, lowercase letters, and be at least 6 characters long.",
+      })
+      return
     }
     try {
-      await register(email, password, name, photoURL);
+      await register(email, password, name, photoURL)
 
       Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful',
-        text: 'You have successfully registered!',
+        icon: "success",
+        title: "Registration Successful",
+        text: "You have successfully registered!",
         timer: 2000,
         showConfirmButton: false,
-      });
+      })
 
-      navigate('/');
+      navigate("/")
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong during registration. Please try again.',
-      });
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong during registration. Please try again.",
+      })
     }
-  };
+  }
 
   const handleGoogleRegistration = async () => {
     try {
-      await loginWithGoogle();
+      await loginWithGoogle()
       Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful',
-        text: 'You have successfully registered with Google!',
+        icon: "success",
+        title: "Registration Successful",
+        text: "You have successfully registered with Google!",
         timer: 2000,
         showConfirmButton: false,
-      });
-      navigate('/');
+      })
+      navigate("/")
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Google registration failed. Please try again.',
-      });
+        icon: "error",
+        title: "Oops...",
+        text: "Google registration failed. Please try again.",
+      })
     }
-  };
+  }
 
   const handleGitHubRegistration = async () => {
     try {
-      await loginWithGitHub();
+      await loginWithGitHub()
       Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful',
-        text: 'You have successfully registered with GitHub!',
+        icon: "success",
+        title: "Registration Successful",
+        text: "You have successfully registered with GitHub!",
         timer: 2000,
         showConfirmButton: false,
-      });
-      navigate('/');
+      })
+      navigate("/")
     } catch (error) {
       Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'GitHub registration failed. Please try again.',
-      });
+        icon: "error",
+        title: "Oops...",
+        text: "GitHub registration failed. Please try again.",
+      })
     }
-  };
+  }
 
   return (
     <div
@@ -119,7 +121,7 @@ const Register = () => {
 
           <div className="relative w-full">
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -130,7 +132,7 @@ const Register = () => {
               className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? '🙈' : '👁️'}
+              {showPassword ? "🙈" : "👁️"}
             </button>
           </div>
 
@@ -140,29 +142,23 @@ const Register = () => {
         </form>
 
         <div className="mt-4 flex justify-between space-x-2">
-          <button
-            onClick={handleGoogleRegistration}
-            className="bg-red-500 text-white p-2 rounded w-full"
-          >
+          <button onClick={handleGoogleRegistration} className="bg-red-500 text-white p-2 rounded w-full">
             Google
           </button>
-          <button
-            onClick={handleGitHubRegistration}
-            className="bg-gray-800 text-white p-2 rounded w-full"
-          >
+          <button onClick={handleGitHubRegistration} className="bg-gray-800 text-white p-2 rounded w-full">
             GitHub
           </button>
         </div>
 
         <p className="mt-4 text-center text-sm text-gray-700 dark:text-gray-300">
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link to="/login" className="text-blue-500 font-medium">
             Login here
           </Link>
         </p>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
