@@ -10,16 +10,22 @@ const Footer = () => {
       className={`${isHomePage ? "bg-indigo-600" : "bg-yellow-700"} dark:bg-gray-800 w-full py-12 transition-colors duration-500`}
     >
       <div className="container mx-auto px-4">
-        <div className="md:flex md:items-center md:justify-between">
-          <div className="mb-6 md:mb-0">
+        <div className="md:flex md:items-start md:justify-between">
+     
+          <div className="mb-6 md:mb-0 md:w-1/3">
+            <h1 className="font-bold text-3xl text-white dark:text-white tracking-wide mb-2">
+              SportsGear
+            </h1>
             <img
               src="/SportsGear logo.png"
               alt="SportsGear Logo"
-              className="h-12 w-12 mb-4 filter dark:(invert 100%) brightness-150"
+              className="h-12 w-12 filter dark:(invert 100%) brightness-150"
             />
-            <h1 className="font-bold text-3xl text-white dark:text-white tracking-wide">SportsGear</h1>
           </div>
-          <div className="md:flex md:space-x-16 md:ml-[-60px]">
+
+      
+          <div className="md:flex md:space-x-16">
+          
             <div className="mb-6 md:mb-0">
               <h2 className="font-bold text-lg mb-4 text-white dark:text-white">Contact Us</h2>
               <p className="text-white dark:text-white">
@@ -31,7 +37,9 @@ const Footer = () => {
               <p className="text-white dark:text-white mt-2">Phone: +880 007 0013</p>
               <p className="text-white dark:text-white mt-2">Address: 123 Sports Avenue, Nilkhet, Dhaka-1205</p>
             </div>
-            <div className="mb-6 md:mb-0 md:ml-[-40px]">
+
+       
+            <div className="mb-6 md:mb-0">
               <h2 className="font-bold text-lg mb-4 text-white dark:text-white">Quick Links</h2>
               <ul className="space-y-2">
                 <li>
@@ -63,6 +71,8 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
+
+         
             <div>
               <h2 className="font-bold text-lg mb-4 text-white dark:text-white">Follow Us</h2>
               <div className="flex space-x-6 text-white dark:text-gray-200">
@@ -94,7 +104,9 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="w-full text-center pt-8 border-t dark:border-gray-600 border-white dark:border-gray-600">
+
+      
+        <div className="w-full text-center pt-8 mt-5 border-t dark:border-gray-600 border-white">
           <p className="text-white dark:text-gray-200 text-sm">
             &copy; {new Date().getFullYear()} SportsGear. All rights reserved.
           </p>
