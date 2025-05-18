@@ -3,18 +3,22 @@
 import { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet";
 import { CartContext } from "../../context/CartContext";
+import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../../components/LoadingSpinner";
+import { useNavigate } from "react-router-dom";
 
 const SpecialDeals = () => {
   const [deals, setDeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useContext(CartContext);
+  const { currentUser } = useContext(AuthContext); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
 
-    fetch("https://b10-a10-server-side-roan.vercel.app/special-deals")
+    fetch("https://b10-a10-server-side-roan.vercel.app/special-deals ")
       .then(async (response) => {
         if (!response.ok) {
           throw new Error(`Server responded with ${response.status}`);
@@ -49,7 +53,7 @@ const SpecialDeals = () => {
           setDeals(localDeals);
           setIsLoading(false);
         } else {
-          fetch("https://b10-a10-server-side-roan.vercel.app/equipment")
+          fetch("https://b10-a10-server-side-roan.vercel.app/equipment ")
             .then((response) => response.json())
             .then((data) => {
               const specialDeals = data.slice(0, 4).map((item) => {
@@ -79,6 +83,11 @@ const SpecialDeals = () => {
   }, []);
 
   const handleBuyNow = (item) => {
+    if (!currentUser) { 
+      navigate("/login");
+      return;
+    }
+
     Swal.fire({
       icon: "success",
       title: "Item Bought!",
@@ -89,6 +98,11 @@ const SpecialDeals = () => {
   };
 
   const handleAddToCart = (item) => {
+    if (!currentUser) { 
+      navigate("/login");
+      return;
+    }
+
     addToCart(item);
     Swal.fire({
       icon: "success",
