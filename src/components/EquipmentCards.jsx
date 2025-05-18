@@ -13,17 +13,14 @@ const EquipmentCards = ({ equipment }) => {
     navigate("/all-sports-equipment");
   };
 
- 
   const displayedEquipment = equipment.slice(0, 10);
 
   return (
     <div className="py-12 px-4 md:px-8 bg-gray-100 dark:bg-gray-800">
-     
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 text-gray-800 dark:text-gray-100">
         Explore Your Interest!
       </h2>
 
-     
       <div className="equipment-grid max-w-full mx-auto">
         {displayedEquipment.map((item) => (
           <div
@@ -87,8 +84,8 @@ const EquipmentCards = ({ equipment }) => {
                 </div>
 
                 <button
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600
-                             hover:from-purple-600 hover:to-blue-600 dark:hover:from-purple-700 dark:hover:to-blue-700
+                  className="w-full bg-blue-500 dark:bg-blue-600
+                             hover:bg-orange-500 dark:hover:bg-orange-600
                              text-white font-semibold py-2 px-4 rounded-full shadow-md 
                              dark:shadow-blue-600/50 text-sm tracking-wide
                              transition-all duration-300"
@@ -102,7 +99,6 @@ const EquipmentCards = ({ equipment }) => {
         ))}
       </div>
 
-   
       <div className="flex justify-center mt-10">
         <button
           onClick={handleSeeMore}
