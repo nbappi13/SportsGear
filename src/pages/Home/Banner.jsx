@@ -47,18 +47,20 @@ const Banner = () => {
             alt={`Slider ${currentIndex + 1}`}
             className="w-full h-full object-cover"
           />
-        </div>
-        <div className="relative z-10 space-y-6 p-6">
-          <h2 className="text-4xl font-bold text-white shadow-text">Shop is fun 😸</h2>
-          <p className="text-lg text-white shadow-text">
-            Browse our quality product collection and enjoy the best quality.
-          </p>
-          <button 
-            onClick={handleBrowseClick}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-orange-500 transition-all duration-300 hover:scale-105"
-          >
-            Browse Now
-          </button>
+          <div className="banner-content absolute inset-0 flex items-center justify-center text-center">
+            <div className="space-y-6 p-6">
+              <h2 className="text-4xl font-bold text-white shadow-text">Shop is fun 😸</h2>
+              <p className="text-lg text-white shadow-text">
+                Browse our quality product collection and enjoy the best quality.
+              </p>
+              <button 
+                onClick={handleBrowseClick}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow hover:bg-orange-500 transition-all duration-300 hover:scale-105"
+              >
+                Browse Now
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div className="absolute top-0 left-0 w-full h-full flex items-start justify-start xl:block lg:hidden md:hidden sm:hidden">
