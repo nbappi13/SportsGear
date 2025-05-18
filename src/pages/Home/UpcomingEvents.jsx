@@ -28,7 +28,6 @@ const UpcomingEvents = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-
   const getUpcomingDateAndTime = (index) => {
     const currentDate = new Date();
     currentDate.setDate(currentDate.getDate() + 7 + index); 
@@ -83,9 +82,9 @@ const UpcomingEvents = () => {
                 {event.description}
               </Typography>
               <Button
-                variant="gradient"
+                variant="filled"
                 color="blue"
-                className="group-hover:bg-gradient-to-r group-hover:from-purple-500 group-hover:to-blue-500 transition-all duration-300"
+                className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-full shadow-md hover:bg-orange-500 transition-all duration-300"
                 onClick={() => handleLearnMore(event, index)}
               >
                 Learn More
@@ -95,7 +94,6 @@ const UpcomingEvents = () => {
         ))}
       </div>
 
-    
       {isModalOpen && selectedEvent && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 p-6 relative">

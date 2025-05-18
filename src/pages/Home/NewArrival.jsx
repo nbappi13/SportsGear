@@ -13,7 +13,7 @@ const NewArrivals = () => {
     setLoading(true);
     setError(false);
 
-    fetch("https://b10-a10-server-side-roan.vercel.app/equipment/new-arrivals")
+    fetch("https://b10-a10-server-side-roan.vercel.app/equipment/new-arrivals ")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -156,11 +156,7 @@ const NewArrivals = () => {
                   </div>
 
                   <button
-                    className="w-full bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600
-                             hover:from-purple-600 hover:to-blue-600 dark:hover:from-purple-700 dark:hover:to-blue-700
-                             text-white font-semibold py-1.5 sm:py-2 px-4 rounded-full shadow-md 
-                             dark:shadow-blue-600/50 text-xs sm:text-sm tracking-wide
-                             transition-all duration-300"
+                    className="w-full bg-blue-500 text-white font-semibold py-1.5 sm:py-2 px-4 rounded-full shadow-md hover:bg-orange-500 transition-all duration-300"
                     onClick={() => handleViewDetails(item._id)}
                   >
                     View Details

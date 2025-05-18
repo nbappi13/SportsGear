@@ -12,7 +12,7 @@ const TopRatedProducts = () => {
         setTopRated(data);
       })
       .catch(() => {
-        // Handle error if needed
+        
       });
   }, []);
 
