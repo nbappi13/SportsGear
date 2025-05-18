@@ -1,5 +1,6 @@
 import { useLocation, Link } from "react-router-dom"
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa"
+import { FaX } from "react-icons/fa6"
 
 const Footer = () => {
   const location = useLocation()
@@ -7,7 +8,7 @@ const Footer = () => {
 
   return (
     <footer
-      className={`${isHomePage ? "bg-indigo-600" : "bg-yellow-700"} dark:bg-gray-800 w-full py-12 transition-colors duration-500`}
+      className={`${isHomePage ? "bg-gray-900" : "bg-cyan-900"} dark:bg-gray-800 w-full py-12 transition-colors duration-500`}
     >
       <div className="container mx-auto px-4">
         <div className="md:flex md:items-start md:justify-between">
@@ -83,10 +84,10 @@ const Footer = () => {
                   <FaFacebookF />
                 </a>
                 <a
-                  href="https://twitter.com"
+                  href="https://x.com/"
                   className="flex items-center text-2xl hover:text-blue-400 transition-colors duration-200"
                 >
-                  <FaTwitter />
+                  <FaX />
                 </a>
                 <a
                   href="https://instagram.com"
