@@ -26,7 +26,7 @@ import HandleSpecialDeals from "./pages/HandleSpecialDeals/HandleSpecialDeals"
 import AboutUs from "./pages/AboutUs"
 import PrivacyPolicy from "./pages/PrivacyPolicy"
 import ScrollToTop from "./components/ScrollToTop"
-
+import Dashboard from "./pages/Dashboard/Dashboard"
 
 const App = () => {
   const { currentUser } = useContext(AuthContext)
@@ -75,14 +75,6 @@ const App = () => {
           />
           <Route path="/login" element={currentUser ? <Navigate to="/" /> : <Login />} />
           <Route path="/register" element={currentUser ? <Navigate to="/" /> : <Register />} />
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <ProfilePage />
-              </PrivateRoute>
-            }
-          />
           <Route path="/special-deals" element={<SpecialDeals />} />
           <Route
             path="/add-special-deal"
@@ -102,6 +94,7 @@ const App = () => {
           />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />

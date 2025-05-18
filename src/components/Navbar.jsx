@@ -1,5 +1,4 @@
 "use client"
-
 import { useContext, useState, useEffect } from "react"
 import { NavLink, useLocation, useNavigate } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
@@ -14,17 +13,15 @@ const Navbar = () => {
   const { theme, toggleTheme } = useThemeContext()
   const location = useLocation()
   const navigate = useNavigate()
-  const [showDashboardMenu, setShowDashboardMenu] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false) 
 
- 
   useEffect(() => {
     setShowMobileMenu(false)
   }, [location.pathname])
 
   const isHomePage = location.pathname === "/"
   const navbarColor = isHomePage ? "bg-gray-800" : theme === "dark" ? "bg-gray-900" : "bg-blue-600"
-
+  
   const handleHomeClick = (e) => {
     e.preventDefault()
     if (location.pathname === "/") {
@@ -41,14 +38,6 @@ const Navbar = () => {
     }, 100)
   }
 
-  const toggleDashboardMenu = () => {
-    setShowDashboardMenu(!showDashboardMenu)
-  }
-
-  const closeDashboardMenu = () => {
-    setShowDashboardMenu(false)
-  }
-
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu)
   }
@@ -62,8 +51,6 @@ const Navbar = () => {
               <img src={spLogo || "/placeholder.svg"} alt="SportsGear Logo" className="h-10 w-10 rounded-full mr-2" />
               SportsGear
             </div>
-
-          
             <button
               className="lg:hidden xl:hidden text-white text-2xl"
               onClick={toggleMobileMenu}
@@ -72,8 +59,6 @@ const Navbar = () => {
               <FaBars />
             </button>
           </div>
-
-      
           <div className="hidden lg:flex xl:flex space-x-4 justify-center flex-1 mt-4 sm:mt-0 text-1xl font-bold">
             <NavLink
               to="/"
@@ -91,13 +76,13 @@ const Navbar = () => {
             <NavLink to="/special-deals" className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white")}>
               Special Deals
             </NavLink>
-            
-            
+            {currentUser && (
+              <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white")}>
+                Dashboard
+              </NavLink>
+            )}
           </div>
-
-         
           <div className="flex items-center space-x-4">
-          
             {!currentUser && (
               <div className="hidden lg:flex xl:flex space-x-4">
                 <NavLink to="/login" className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white")}>
@@ -108,8 +93,6 @@ const Navbar = () => {
                 </NavLink>
               </div>
             )}
-
-          
             {currentUser && (
               <div className="relative text-white">
                 {currentUser.photoURL && (
@@ -120,109 +103,6 @@ const Navbar = () => {
                     title={currentUser.displayName || currentUser.email}
                   />
                 )}
-
-                <div className="relative inline-block text-left ml-2">
-                  <button
-                    onClick={toggleDashboardMenu}
-                    className="text-white hover:text-yellow-500 transition-colors duration-200 flex items-center"
-                  >
-                    Dashboard
-                    <svg
-                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${
-                        showDashboardMenu ? "rotate-180" : ""
-                      }`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-
-                  {showDashboardMenu && (
-                    <>
-                      <div className="fixed inset-0 z-10" onClick={closeDashboardMenu}></div>
-
-                      <div
-                        className={`absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 z-20`}
-                        style={{
-                          transform: window.innerWidth < 640 ? "translateX(29%)" : "translateX(0)",
-                        }}
-                      >
-                        <div className="py-1" role="menu" aria-orientation="vertical">
-                          <NavLink
-                            to="/add-equipment"
-                            className={({ isActive }) =>
-                              `block px-4 py-2 text-sm ${
-                                isActive
-                                  ? "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-                                  : "text-gray-700 dark:text-gray-200"
-                              } hover:bg-gray-100 dark:hover:bg-gray-700`
-                            }
-                            onClick={closeDashboardMenu}
-                          >
-                            Add Equipment
-                          </NavLink>
-                          <NavLink
-                            to="/my-equipment-list"
-                            className={({ isActive }) =>
-                              `block px-4 py-2 text-sm ${
-                                isActive
-                                  ? "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-                                  : "text-gray-700 dark:text-gray-200"
-                              } hover:bg-gray-100 dark:hover:bg-gray-700`
-                            }
-                            onClick={closeDashboardMenu}
-                          >
-                            My Equipment List
-                          </NavLink>
-                          <NavLink
-                            to="/add-special-deal"
-                            className={({ isActive }) =>
-                              `block px-4 py-2 text-sm ${
-                                isActive
-                                  ? "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-                                  : "text-gray-700 dark:text-gray-200"
-                              } hover:bg-gray-100 dark:hover:bg-gray-700`
-                            }
-                            onClick={closeDashboardMenu}
-                          >
-                            Add Special Deal
-                          </NavLink>
-                          <NavLink
-                            to="/handle-special-deals"
-                            className={({ isActive }) =>
-                              `block px-4 py-2 text-sm ${
-                                isActive
-                                  ? "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-                                  : "text-gray-700 dark:text-gray-200"
-                              } hover:bg-gray-100 dark:hover:bg-gray-700`
-                            }
-                            onClick={closeDashboardMenu}
-                          >
-                            Handle Special Deals
-                          </NavLink>
-                          <NavLink
-                            to="/profile"
-                            className={({ isActive }) =>
-                              `block px-4 py-2 text-sm ${
-                                isActive
-                                  ? "bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-white"
-                                  : "text-gray-700 dark:text-gray-200"
-                              } hover:bg-gray-100 dark:hover:bg-gray-700`
-                            }
-                            onClick={closeDashboardMenu}
-                          >
-                            Profile
-                          </NavLink>
-                        </div>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-            
                 <button
                   onClick={logout}
                   className="text-white ml-2 hover:text-yellow-500 transition-colors duration-200 hidden lg:inline xl:inline"
@@ -231,8 +111,6 @@ const Navbar = () => {
                 </button>
               </div>
             )}
-
-        
             <NavLink
               to="/cart"
               className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white") + " relative"}
@@ -257,8 +135,6 @@ const Navbar = () => {
             </button>
           </div>
         </div>
-
-    
         {showMobileMenu && (
           <div className="lg:hidden xl:hidden mt-4 bg-gray-700 dark:bg-gray-800 rounded-lg p-4 animate-fadeIn">
             <div className="flex flex-col space-y-3">
@@ -287,10 +163,11 @@ const Navbar = () => {
               >
                 Special Deals
               </NavLink>
-              
-              
-
-             
+              {currentUser && (
+                <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "bg-blue-500 text-white" : "text-white hover:bg-gray-600")}>
+                  Dashboard
+                </NavLink>
+              )}
               {!currentUser ? (
                 <div className="border-t border-gray-600 pt-3 mt-2">
                   <NavLink
@@ -311,7 +188,6 @@ const Navbar = () => {
                   </NavLink>
                 </div>
               ) : (
-                
                 <button
                   onClick={logout}
                   className="block w-full text-left py-2 px-4 rounded text-white hover:bg-gray-600 border-t border-gray-600 mt-2 pt-3"
