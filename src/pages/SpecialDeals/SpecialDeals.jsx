@@ -1,91 +1,89 @@
-"use client";
+"use client"
 
-import { useState, useEffect, useContext } from "react";
-import { Helmet } from "react-helmet";
-import { CartContext } from "../../context/CartContext";
-import { AuthContext } from "../../context/AuthContext";
-import Swal from "sweetalert2";
-import LoadingSpinner from "../../components/LoadingSpinner";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react"
+import { Helmet } from "react-helmet"
+import { CartContext } from "../../context/CartContext"
+import { AuthContext } from "../../context/AuthContext"
+import Swal from "sweetalert2"
+import LoadingSpinner from "../../components/LoadingSpinner"
+import { useNavigate } from "react-router-dom"
 
 const SpecialDeals = () => {
-  const [deals, setDeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const { addToCart } = useContext(CartContext);
-  const { currentUser } = useContext(AuthContext); 
-  const navigate = useNavigate();
+  const [deals, setDeals] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const { addToCart } = useContext(CartContext)
+  const { currentUser } = useContext(AuthContext)
+  const navigate = useNavigate()
 
+  // Fetch special deals data when component loads
   useEffect(() => {
-    setIsLoading(true);
+    setIsLoading(true)
 
+    // Try to fetch from server first
     fetch("https://b10-a10-server-side-roan.vercel.app/special-deals ")
       .then(async (response) => {
         if (!response.ok) {
-          throw new Error(`Server responded with ${response.status}`);
+          throw new Error(`Server responded with ${response.status}`)
         }
-        return response.json();
+        return response.json()
       })
       .then((serverDeals) => {
-        const localDeals = JSON.parse(
-          localStorage.getItem("specialDeals") || "[]"
-        );
-        const combinedDeals = [...serverDeals];
+        // Combine server deals with local deals
+        const localDeals = JSON.parse(localStorage.getItem("specialDeals") || "[]")
+        const combinedDeals = [...serverDeals]
 
         localDeals.forEach((localDeal) => {
-          const exists = combinedDeals.some(
-            (serverDeal) => serverDeal.itemName === localDeal.itemName
-          );
+          const exists = combinedDeals.some((serverDeal) => serverDeal.itemName === localDeal.itemName)
           if (!exists) {
-            combinedDeals.push(localDeal);
+            combinedDeals.push(localDeal)
           }
-        });
+        })
 
-        setDeals(combinedDeals);
-        setIsLoading(false);
+        setDeals(combinedDeals)
+        setIsLoading(false)
       })
       .catch((error) => {
-        console.error("Error fetching from server:", error);
+        console.error("Error fetching from server:", error)
 
-        const localDeals = JSON.parse(
-          localStorage.getItem("specialDeals") || "[]"
-        );
+        // Fallback to local storage if server fails
+        const localDeals = JSON.parse(localStorage.getItem("specialDeals") || "[]")
         if (localDeals.length > 0) {
-          setDeals(localDeals);
-          setIsLoading(false);
+          setDeals(localDeals)
+          setIsLoading(false)
         } else {
+          // Create fake deals from regular equipment if no local deals
           fetch("https://b10-a10-server-side-roan.vercel.app/equipment ")
             .then((response) => response.json())
             .then((data) => {
               const specialDeals = data.slice(0, 4).map((item) => {
-                const originalPrice = Number.parseFloat(item.price);
-                const discountPercent = Math.floor(Math.random() * 20) + 10;
-                const discountedPrice = (
-                  (originalPrice * (100 - discountPercent)) /
-                  100
-                ).toFixed(2);
+                const originalPrice = Number.parseFloat(item.price)
+                const discountPercent = Math.floor(Math.random() * 20) + 10
+                const discountedPrice = ((originalPrice * (100 - discountPercent)) / 100).toFixed(2)
 
                 return {
                   ...item,
                   originalPrice: originalPrice.toFixed(2),
                   price: discountedPrice,
-                };
-              });
+                }
+              })
 
-              setDeals(specialDeals);
-              setIsLoading(false);
+              setDeals(specialDeals)
+              setIsLoading(false)
             })
             .catch((error) => {
-              console.error("Error fetching equipment:", error);
-              setIsLoading(false);
-            });
+              console.error("Error fetching equipment:", error)
+              setIsLoading(false)
+            })
         }
-      });
-  }, []);
+      })
+  }, [])
 
+  // Handle buy now button click
   const handleBuyNow = (item) => {
-    if (!currentUser) { 
-      navigate("/login");
-      return;
+    // Redirect to login if not logged in
+    if (!currentUser) {
+      navigate("/login")
+      return
     }
 
     Swal.fire({
@@ -94,39 +92,39 @@ const SpecialDeals = () => {
       text: "Congratulations! You have successfully bought the item.",
       timer: 2000,
       showConfirmButton: false,
-    });
-  };
+    })
+  }
 
+  // Handle add to cart button click
   const handleAddToCart = (item) => {
-    if (!currentUser) { 
-      navigate("/login");
-      return;
+    // Redirect to login if not logged in
+    if (!currentUser) {
+      navigate("/login")
+      return
     }
 
-    addToCart(item);
+    addToCart(item)
     Swal.fire({
       icon: "success",
       title: "Added to Cart!",
       text: "Item has been added to your cart.",
       timer: 2000,
       showConfirmButton: false,
-    });
-  };
+    })
+  }
 
+  // Calculate discount percentage
   const calculateDiscount = (originalPrice, price) => {
-    const original = Number.parseFloat(originalPrice);
-    const discounted = Number.parseFloat(price);
-    return Math.round(((original - discounted) / original) * 100);
-  };
+    const original = Number.parseFloat(originalPrice)
+    const discounted = Number.parseFloat(price)
+    return Math.round(((original - discounted) / original) * 100)
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-12 px-4 md:px-8">
       <Helmet>
         <title>Special Deals | SportsGear</title>
-        <meta
-          name="description"
-          content="Exclusive deals on premium sports equipment. Limited time offers!"
-        />
+        <meta name="description" content="Exclusive deals on premium sports equipment. Limited time offers!" />
       </Helmet>
 
       <div className="max-w-6xl mx-auto">
@@ -149,44 +147,38 @@ const SpecialDeals = () => {
                       src={item.photoUrl || "/placeholder.svg"}
                       alt={item.itemName}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
 
                   <div className="w-full md:w-3/5 p-6 flex flex-col">
                     <div className="flex-grow">
-                      <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">
-                        {item.itemName}
-                      </h2>
-                      <p className="text-gray-600 dark:text-gray-300 mb-4">
-                        {item.description}
-                      </p>
+                      <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">{item.itemName}</h2>
+                      <p className="text-gray-600 dark:text-gray-300 mb-4">{item.description}</p>
 
+                      {/* Price section with discount */}
                       <div className="mb-4">
                         <div className="flex items-center">
-                          <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                            US ${item.price}
-                          </span>
+                          <span className="text-2xl font-bold text-gray-900 dark:text-gray-100">US ${item.price}</span>
                         </div>
                         <div className="flex items-center">
                           <span className="text-gray-500 dark:text-gray-400 line-through mr-2">
                             US ${item.originalPrice}
                           </span>
                           <span className="text-red-600 dark:text-red-400 font-semibold">
-                            {calculateDiscount(item.originalPrice, item.price)}%
-                            OFF
+                            {calculateDiscount(item.originalPrice, item.price)}% OFF
                           </span>
                         </div>
                       </div>
 
+                      {/* Star rating */}
                       <div className="flex items-center mb-4">
                         <div className="flex">
                           {[...Array(5)].map((_, i) => (
                             <svg
                               key={i}
                               className={`w-5 h-5 ${
-                                i < Math.floor(Number.parseFloat(item.rating))
-                                  ? "text-yellow-400"
-                                  : "text-gray-300"
+                                i < Math.floor(Number.parseFloat(item.rating)) ? "text-yellow-400" : "text-gray-300"
                               }`}
                               fill="currentColor"
                               viewBox="0 0 20 20"
@@ -195,23 +187,18 @@ const SpecialDeals = () => {
                             </svg>
                           ))}
                         </div>
-                        <span className="text-gray-600 dark:text-gray-400 ml-2">
-                          ({item.rating})
-                        </span>
+                        <span className="text-gray-600 dark:text-gray-400 ml-2">({item.rating})</span>
                       </div>
 
+                      {/* Product details */}
                       <div className="text-sm text-gray-600 dark:text-gray-300 mb-4">
                         <p>Category: {item.categoryName}</p>
-                        <p>
-                          Customization:{" "}
-                          {item.customization === "yes"
-                            ? "Available"
-                            : "Not Available"}
-                        </p>
+                        <p>Customization: {item.customization === "yes" ? "Available" : "Not Available"}</p>
                         <p>Processing Time: {item.processingTime}</p>
                       </div>
                     </div>
 
+                    {/* Action buttons */}
                     <div className="flex flex-col sm:flex-row gap-3 mt-4">
                       <button
                         onClick={() => handleBuyNow(item)}
@@ -234,7 +221,7 @@ const SpecialDeals = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default SpecialDeals;
+export default SpecialDeals

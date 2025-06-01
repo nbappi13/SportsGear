@@ -1,19 +1,22 @@
-"use client";
-import { useNavigate } from "react-router-dom";
-import "../styles/EquipmentCards.css"; 
+"use client"
+import { useNavigate } from "react-router-dom"
+import "../styles/EquipmentCards.css"
 
 const EquipmentCards = ({ equipment }) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
+  // Navigate to product details page
   const handleViewDetails = (id) => {
-    navigate(`/viewdetails/${id}`);
-  };
+    navigate(`/viewdetails/${id}`)
+  }
 
+  // Navigate to all equipment page
   const handleSeeMore = () => {
-    navigate("/all-sports-equipment");
-  };
+    navigate("/all-sports-equipment")
+  }
 
-  const displayedEquipment = equipment.slice(0, 10);
+  // Show only first 10 items on home page
+  const displayedEquipment = equipment.slice(0, 10)
 
   return (
     <div className="py-12 px-4 md:px-8 bg-gray-100 dark:bg-gray-800">
@@ -23,35 +26,28 @@ const EquipmentCards = ({ equipment }) => {
 
       <div className="equipment-grid max-w-full mx-auto">
         {displayedEquipment.map((item) => (
-          <div
-            key={item._id}
-            className="equipment-card dark:bg-gray-700 dark:border-gray-600"
-          >
+          <div key={item._id} className="equipment-card dark:bg-gray-700 dark:border-gray-600">
             <div className="relative">
               <img
                 src={item.photoUrl || "/placeholder.svg"}
                 alt={item.itemName}
                 className="w-full h-40 object-cover"
+                loading="lazy"
               />
+              {/* Show discount badge if original price exists */}
               {item.originalPrice && (
                 <div className="absolute top-2 right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                  {Math.round(
-                    ((item.originalPrice - item.price) / item.originalPrice) * 100
-                  )}
-                  % OFF
+                  {Math.round(((item.originalPrice - item.price) / item.originalPrice) * 100)}% OFF
                 </div>
               )}
             </div>
 
             <div className="p-4 flex-grow flex flex-col">
-              <h3 className="text-lg font-bold mb-1 text-gray-900 dark:text-gray-100 line-clamp-1">
-                {item.itemName}
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">
-                Category: {item.categoryName}
-              </p>
+              <h3 className="text-lg font-bold mb-1 text-gray-900 dark:text-gray-100 line-clamp-1">{item.itemName}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Category: {item.categoryName}</p>
 
               <div className="mt-auto">
+                {/* Price display with discount */}
                 <div className="flex items-center mb-2">
                   {item.originalPrice ? (
                     <>
@@ -65,6 +61,7 @@ const EquipmentCards = ({ equipment }) => {
                   )}
                 </div>
 
+                {/* Star rating display */}
                 <div className="flex items-center mb-3">
                   <div className="flex">
                     {[...Array(5)].map((_, i) => (
@@ -78,9 +75,7 @@ const EquipmentCards = ({ equipment }) => {
                       </svg>
                     ))}
                   </div>
-                  <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">
-                    ({item.rating})
-                  </span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 ml-1">({item.rating})</span>
                 </div>
 
                 <button
@@ -99,6 +94,7 @@ const EquipmentCards = ({ equipment }) => {
         ))}
       </div>
 
+      {/* See more button */}
       <div className="flex justify-center mt-10">
         <button
           onClick={handleSeeMore}
@@ -110,7 +106,7 @@ const EquipmentCards = ({ equipment }) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EquipmentCards;
+export default EquipmentCards

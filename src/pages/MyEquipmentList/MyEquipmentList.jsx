@@ -15,6 +15,7 @@ const MyEquipmentList = () => {
   const [isLoading, setIsLoading] = useState(true)
   const navigate = useNavigate()
 
+  // Fetch user's equipment when component loads
   useEffect(() => {
     const fetchUserEquipment = async () => {
       setIsLoading(true)
@@ -40,10 +41,12 @@ const MyEquipmentList = () => {
     }
   }, [currentUser])
 
+  // Navigate to update page
   const handleUpdate = (id) => {
     navigate(`/update/${id}`)
   }
 
+  // Show delete confirmation modal
   const handleDelete = (id) => {
     setDeleteItemId(id)
   }
@@ -72,6 +75,7 @@ const MyEquipmentList = () => {
                     src={item.photoUrl || "/placeholder.svg"}
                     alt={item.itemName}
                     className="w-full h-48 object-cover"
+                    loading="lazy"
                   />
                   <div className="p-4">
                     <h3 className="text-xl font-bold mb-2 dark:text-gray-100">{item.itemName}</h3>
@@ -99,15 +103,19 @@ const MyEquipmentList = () => {
               <p className="text-center dark:text-gray-300">No equipment found.</p>
             )}
           </div>
+
+          {/* Delete confirmation modal */}
           {deleteItemId && (
             <ConfirmationModal
               itemId={deleteItemId}
               onClose={() => setDeleteItemId(null)}
               onConfirm={() => {
+                // Delete equipment from server
                 fetch(`https://b10-a10-server-side-roan.vercel.app/equipment/${deleteItemId}`, {
                   method: "DELETE",
                 })
                   .then(() => {
+                    // Remove from local state
                     setEquipment((prev) => prev.filter((item) => item._id !== deleteItemId))
                     setDeleteItemId(null)
                     Swal.fire({

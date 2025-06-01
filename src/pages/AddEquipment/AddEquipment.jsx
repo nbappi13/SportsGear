@@ -8,6 +8,8 @@ import { CgImage } from "react-icons/cg"
 
 const AddEquipment = () => {
   const { currentUser } = useContext(AuthContext)
+
+  // Form data state
   const [formData, setFormData] = useState({
     photoUrl: "",
     itemName: "",
@@ -20,20 +22,24 @@ const AddEquipment = () => {
     stockStatus: "1",
   })
 
+  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
   }
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault()
 
+    // Add user info to equipment data
     const userEquipment = {
       ...formData,
       userEmail: currentUser.email,
       userName: currentUser.displayName,
     }
 
+    // Send data to server
     fetch("https://b10-a10-server-side-roan.vercel.app/addEquip", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -49,6 +55,7 @@ const AddEquipment = () => {
             timer: 2000,
             showConfirmButton: false,
           })
+          // Reset form after success
           setFormData({
             photoUrl: "",
             itemName: "",

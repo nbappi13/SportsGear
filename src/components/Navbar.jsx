@@ -5,7 +5,7 @@ import { AuthContext } from "../context/AuthContext"
 import { CartContext } from "../context/CartContext"
 import { useThemeContext } from "../context/ThemeContext"
 import spLogo from "../assets/SportsGear logo.png"
-import { FaBars } from "react-icons/fa" 
+import { FaBars } from "react-icons/fa"
 
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext)
@@ -13,15 +13,18 @@ const Navbar = () => {
   const { theme, toggleTheme } = useThemeContext()
   const location = useLocation()
   const navigate = useNavigate()
-  const [showMobileMenu, setShowMobileMenu] = useState(false) 
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
 
+  // Close mobile menu when route changes
   useEffect(() => {
     setShowMobileMenu(false)
   }, [location.pathname])
 
+  // Set navbar color based on current page
   const isHomePage = location.pathname === "/"
   const navbarColor = isHomePage ? "bg-gray-800" : theme === "dark" ? "bg-gray-900" : "bg-blue-600"
-  
+
+  // Handle home button click - scroll to top if already on home
   const handleHomeClick = (e) => {
     e.preventDefault()
     if (location.pathname === "/") {
@@ -31,6 +34,7 @@ const Navbar = () => {
     }
   }
 
+  // Navigate to products section on home page
   const handleBuyNowClick = () => {
     navigate("/")
     setTimeout(() => {
@@ -38,6 +42,7 @@ const Navbar = () => {
     }, 100)
   }
 
+  // Toggle mobile menu
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu)
   }
@@ -46,9 +51,15 @@ const Navbar = () => {
     <div className="sticky top-0 z-50">
       <nav className={`${navbarColor} p-4`}>
         <div className="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+          {/* Logo and mobile menu button */}
           <div className="flex items-center justify-between w-full sm:w-auto text-white font-bold text-2xl mb-4 sm:mb-0">
             <div className="flex items-center">
-              <img src={spLogo || "/placeholder.svg"} alt="SportsGear Logo" className="h-10 w-10 rounded-full mr-2" />
+              <img
+                src={spLogo || "/placeholder.svg"}
+                alt="SportsGear Logo"
+                className="h-10 w-10 rounded-full mr-2"
+                loading="lazy"
+              />
               SportsGear
             </div>
             <button
@@ -59,6 +70,8 @@ const Navbar = () => {
               <FaBars />
             </button>
           </div>
+
+          {/* Desktop navigation links */}
           <div className="hidden lg:flex xl:flex space-x-4 justify-center flex-1 mt-4 sm:mt-0 text-1xl font-bold">
             <NavLink
               to="/"
@@ -82,7 +95,10 @@ const Navbar = () => {
               </NavLink>
             )}
           </div>
+
+          {/* Right side - auth, cart, theme toggle */}
           <div className="flex items-center space-x-4">
+            {/* Login/Register links for non-logged in users */}
             {!currentUser && (
               <div className="hidden lg:flex xl:flex space-x-4">
                 <NavLink to="/login" className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white")}>
@@ -93,6 +109,8 @@ const Navbar = () => {
                 </NavLink>
               </div>
             )}
+
+            {/* User avatar and logout for logged in users */}
             {currentUser && (
               <div className="relative text-white">
                 {currentUser.photoURL && (
@@ -101,6 +119,7 @@ const Navbar = () => {
                     alt="User Avatar"
                     className="inline-block h-8 w-8 rounded-full cursor-pointer"
                     title={currentUser.displayName || currentUser.email}
+                    loading="lazy"
                   />
                 )}
                 <button
@@ -111,6 +130,8 @@ const Navbar = () => {
                 </button>
               </div>
             )}
+
+            {/* Shopping cart with item count */}
             <NavLink
               to="/cart"
               className={({ isActive }) => (isActive ? "text-yellow-500" : "text-white") + " relative"}
@@ -124,17 +145,23 @@ const Navbar = () => {
                 )}
               </div>
             </NavLink>
+
+            {/* Buy now button */}
             <button
               onClick={handleBuyNowClick}
               className="hidden md:hidden lg:block xl:block bg-blue-500 text-white px-3 py-2 rounded"
             >
               Buy Now
             </button>
+
+            {/* Theme toggle button */}
             <button onClick={toggleTheme} className="text-white">
               {theme === "light" ? "🌙" : "☀️"}
             </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
         {showMobileMenu && (
           <div className="lg:hidden xl:hidden mt-4 bg-gray-700 dark:bg-gray-800 rounded-lg p-4 animate-fadeIn">
             <div className="flex flex-col space-y-3">
@@ -164,7 +191,10 @@ const Navbar = () => {
                 Special Deals
               </NavLink>
               {currentUser && (
-                <NavLink to="/dashboard" className={({ isActive }) => (isActive ? "bg-blue-500 text-white" : "text-white hover:bg-gray-600")}>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) => (isActive ? "bg-blue-500 text-white" : "text-white hover:bg-gray-600")}
+                >
                   Dashboard
                 </NavLink>
               )}

@@ -5,7 +5,6 @@ import { Helmet } from "react-helmet"
 import Banner from "./Banner"
 import EquipmentCards from "../../components/EquipmentCards"
 import TopRatedProducts from "./TopRatedProducts"
-
 import UpcomingEvents from "./UpcomingEvents"
 import DealsHeroSection from "../../components/DealsHeroSection"
 import NewArrivals from "./NewArrival"
@@ -13,6 +12,7 @@ import NewArrivals from "./NewArrival"
 const Home = () => {
   const [equipment, setEquipment] = useState([])
 
+  // Fetch equipment data when component loads
   useEffect(() => {
     fetch("https://b10-a10-server-side-roan.vercel.app/equipment/home")
       .then((response) => response.json())
@@ -34,11 +34,16 @@ const Home = () => {
         />
         <meta property="og:image" content="/path/to/your/home-image.jpg" />
       </Helmet>
+
+      {/* Hero banner section */}
       <Banner />
 
+      {/* Main products section - scrollable from navbar */}
       <div id="products-section" className="scroll-mt-30">
         <EquipmentCards equipment={equipment} />
       </div>
+
+      {/* Other home page sections */}
       <TopRatedProducts />
       <DealsHeroSection />
       <NewArrivals />

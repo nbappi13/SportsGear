@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext"
 const ProfilePage = () => {
   const { currentUser } = useContext(AuthContext)
 
+  // Show login message if user not logged in
   if (!currentUser) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -18,10 +19,12 @@ const ProfilePage = () => {
     <div className="p-6 bg-gray-200 dark:bg-gray-900 min-h-screen">
       <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6">
         <div className="flex flex-col md:flex-row items-center">
+          {/* User profile image */}
           <img
             src={currentUser.photoURL || "/placeholder.svg"}
             alt="Profile"
             className="w-32 h-32 rounded-full shadow-md mb-4 md:mb-0 md:mr-6"
+            loading="lazy"
           />
           <div>
             <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">

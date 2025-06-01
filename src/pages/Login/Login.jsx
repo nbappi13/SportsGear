@@ -12,6 +12,7 @@ const Login = () => {
   const { login, loginWithGoogle, loginWithGitHub } = useContext(AuthContext)
   const navigate = useNavigate()
 
+  // Handle email/password login
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -35,6 +36,7 @@ const Login = () => {
     }
   }
 
+  // Handle Google login
   const handleGoogleLogin = async () => {
     try {
       await loginWithGoogle()
@@ -57,6 +59,7 @@ const Login = () => {
     }
   }
 
+  // Handle GitHub login
   const handleGitHubLogin = async () => {
     try {
       await loginWithGitHub()
@@ -106,6 +109,7 @@ const Login = () => {
               placeholder="Password"
               className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
+            {/* Password visibility toggle */}
             <button
               type="button"
               className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500"
@@ -120,6 +124,7 @@ const Login = () => {
           </button>
         </form>
 
+        {/* Social login buttons */}
         <div className="mt-4 flex justify-between gap-2 flex-wrap">
           <button onClick={handleGoogleLogin} className="flex-1 bg-red-500 text-white p-2 rounded">
             Google

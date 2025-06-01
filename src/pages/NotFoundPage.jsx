@@ -1,6 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Button } from "@material-tailwind/react";
+import { Link } from "react-router-dom"
+import { Button } from "@material-tailwind/react"
 
 const NotFoundPage = () => {
   return (
@@ -15,7 +14,7 @@ const NotFoundPage = () => {
         </Link>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default NotFoundPage;
+export default NotFoundPage
